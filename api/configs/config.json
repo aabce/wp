@@ -1,0 +1,23 @@
+{
+   "server_port": 5000,
+   "mongodb": {
+      "url": "mongodb://192.168.99.100:27017/wp",
+      "options": {
+         "useCreateIndex": true,
+         "useNewUrlParser": true,
+         "useFindAndModify": false,
+         "useUnifiedTopology": true
+      }
+   },
+   "whats_app": {
+    "api_url": "https://api.chat-api.com/instance69551/",
+    "token": "0vmvy4q79rmywnvx"
+   },
+   "jwt": {
+     "secret": "test",
+     "options": {
+       "issuer": "admin",
+       "expiresIn": "1h"
+     }
+   }
+}

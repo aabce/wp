@@ -1,0 +1,1014 @@
+{
+	"info": {
+		"_postman_id": "771ff194-7387-4ef0-b6a5-c01ccb38c0c4",
+		"name": "WA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Subscription",
+			"item": [
+				{
+					"name": "Subscriber",
+					"item": [
+						{
+							"name": "Get All Customers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/get_subscribers",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"get_subscribers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/get_subscriber/:subscriber_phone",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"get_subscriber",
+										":subscriber_phone"
+									],
+									"variable": [
+										{
+											"key": "subscriber_phone",
+											"value": "+77777777775"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer Subscription",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/get_subscription/:subscriber_phone",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"get_subscription",
+										":subscriber_phone"
+									],
+									"variable": [
+										{
+											"key": "subscriber_phone",
+											"value": "+77777777"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pay Customer Subscription",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/pay_subscription/:subscriber_phone",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"pay_subscription",
+										":subscriber_phone"
+									],
+									"variable": [
+										{
+											"key": "subscriber_phone",
+											"value": "87052054400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Customer by ID",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"s\",\n    \"last_name\": \"a\",\n    \"email\": \"s@f.de\",\n    \"phone\": \"+777231123374121\",\n    \"password\": \"12345\",\n    \"confirm_password\": \"12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/update_subscriber/:subscriber_phone",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"update_subscriber",
+										":subscriber_phone"
+									],
+									"variable": [
+										{
+											"key": "subscriber_phone",
+											"value": "+77777777775"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Customer by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/delete_subscriber/:subscriber_phone",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"delete_subscriber",
+										":subscriber_phone"
+									],
+									"variable": [
+										{
+											"key": "subscriber_phone",
+											"value": "+77777777775"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sign up(Create Customer)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"s\",\n    \"last_name\": \"a\",\n    \"email\": \"lupe36@ethereal.email\",\n    \"phone\": \"+77777777\",\n    \"password\": \"12345\",\n    \"confirm_password\": \"12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/sign_up",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"sign_up"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sign in(Enter to the System)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"+77052054400\",\n    \"password\": \"12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/sign_in",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"sign_in"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sign out(Exit from the System)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDhiMzljOTY0YjhkOGU2YzNjMzViODIiLCJwaG9uZSI6Iis3Nzc3Nzc3NyIsImlhdCI6MTU2OTQwNTM5OSwiZXhwIjoxNTY5NDA4OTk5LCJpc3MiOiJhZG1pbiJ9.MAWEskh4ErIUFuKayljFLu7mMwdjUI47ViVySFNaEBk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/sign_out",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"sign_out"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"phone\": \"+77052054400\",\n\t\"old_password\": \"12345\",\n\t\"new_password\": \"12345\",\n\t\"confirm_password\": \"12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/change",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"change"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Forgot Password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"phone\": \"+77052054400\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/forgot",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"forgot"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Restore Password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"phone\": \"+77052054400\",\n\t\"code\": \"itn2rvqh\",\n\t\"password\": \"12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscriber/restore",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2377a90a-b8d1-44b8-b661-f523052c0305",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "763350cc-3ab9-4192-82b0-690a6e93b72a",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Message",
+					"item": [
+						{
+							"name": "Get All Messages",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/message/get_messages",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"message",
+										"get_messages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Message By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/message/get_message/:message_id",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"message",
+										"get_message",
+										":message_id"
+									],
+									"variable": [
+										{
+											"key": "message_id",
+											"value": "5d7f05ea3305892a00782976"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Message",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"text\": \"*some messagew* _hjkadshk_\\n\\n~ashjd~\",\n\t\"schedule_date\": \"2019-09-27T13:34:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/message/create_message",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"message",
+										"create_message"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Message by ID",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"text\": \"some message wuth custom text\",\n\t\"schedule_date\": \"2019-09-27T13:06:00\"\n}"
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/message/update_message/:message_id",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"message",
+										"update_message",
+										":message_id"
+									],
+									"variable": [
+										{
+											"key": "message_id",
+											"value": "5d8dae0b56402036d422cf48"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Message by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"login\": \"test12\"\n}"
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/message/delete_message/:message_id",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"message",
+										"delete_message",
+										":message_id"
+									],
+									"variable": [
+										{
+											"key": "message_id",
+											"value": "5d7f05123305892a00782975"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2377a90a-b8d1-44b8-b661-f523052c0305",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "763350cc-3ab9-4192-82b0-690a6e93b72a",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Promo Code",
+					"item": [
+						{
+							"name": "Get Promo Codes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/promo_code/get_promo_codes",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"promo_code",
+										"get_promo_codes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Promo Code by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/promo_code/get_promo_code/:promo_code",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"promo_code",
+										"get_promo_code",
+										":promo_code"
+									],
+									"variable": [
+										{
+											"key": "promo_code",
+											"value": "abc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get discounted Price by Promo Code",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/promo_code/get_discount_price/:price/:promo_code",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"promo_code",
+										"get_discount_price",
+										":price",
+										":promo_code"
+									],
+									"variable": [
+										{
+											"key": "price",
+											"value": "10"
+										},
+										{
+											"key": "promo_code",
+											"value": "abc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Promo Code",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"promo_code\": \"abc\",\n\t\"discount_rate\": \"20\",\n\t\"expires_date\": \"2019-09-26T05:48:00.992+00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/promo_code/create_promo_code",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"promo_code",
+										"create_promo_code"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Promo Code",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"discount_rate\": \"50\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/promo_code/update_promo_code/:promo_code",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"promo_code",
+										"update_promo_code",
+										":promo_code"
+									],
+									"variable": [
+										{
+											"key": "promo_code",
+											"value": "abc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Promo Code",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/promo_code/delete_promo_code/:promo_code",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"promo_code",
+										"delete_promo_code",
+										":promo_code"
+									],
+									"variable": [
+										{
+											"key": "promo_code",
+											"value": "abc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cbf3b05d-00d3-4fdc-9145-75731b3b9f52",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ab6399ff-3f5b-49dd-9109-0e88fd678374",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Subscription",
+					"item": [
+						{
+							"name": "Get Subscriptions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscription/get_subscriptions",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscription",
+										"get_subscriptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Subscription by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscription/get_subscription/:subscription_id",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscription",
+										"get_subscription",
+										":subscription_id"
+									],
+									"variable": [
+										{
+											"key": "subscription_id",
+											"value": "5d8c7a5438fd5f0c9afbea3e"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Subscription",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\": \"abc\",\n\t\"prices\": {\n\t\t\"amount\": 100,\n\t\t\"currency\": \"KZT\",\n\t\t\"discount_amount\": 100\n\t},\n\t\"expires_date\": \"2019-09-26T05:48:00.992+00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscription/create_subscription",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscription",
+										"create_subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Subscription",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"discount_rate\": \"50\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscription/update_subscription/:subscription_id",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscription",
+										"update_subscription",
+										":subscription_id"
+									],
+									"variable": [
+										{
+											"key": "subscription_id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Subscription",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{Local Host URL}}/subscription/subscription/delete_subscription/:subscription_id",
+									"host": [
+										"{{Local Host URL}}"
+									],
+									"path": [
+										"subscription",
+										"subscription",
+										"delete_subscription",
+										":subscription_id"
+									],
+									"variable": [
+										{
+											"key": "subscription_id",
+											"value": "5d8c7a5438fd5f0c9afbea3e"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cbf3b05d-00d3-4fdc-9145-75731b3b9f52",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ab6399ff-3f5b-49dd-9109-0e88fd678374",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4f896e9a-bfac-43f7-a23f-55b9554b24ca",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "708a2094-65c6-4539-83a8-dfb9311ec5e6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

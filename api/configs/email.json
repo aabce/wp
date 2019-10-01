@@ -1,0 +1,10 @@
+{
+  "email_settings": {
+    "host": "smtp.ethereal.email",
+    "port": 587,
+    "auth": {
+      "user": "durward.trantow@ethereal.email",
+      "pass": "uCSkt78dusGZPGqBVD"
+    }
+  }
+}
