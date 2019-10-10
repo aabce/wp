@@ -25,6 +25,13 @@
     "path": "^0.12.7"
   },
   "_moduleAliases": {
-      "@file-store": "./fileStore"
+      "@file-store": "./fileStore",
+      "@tella-utills": "./api/utills",
+      "@tella-middlewares": "./api/middlewares",
+      "@tella-database": "./api/database",
+      "@tella-configs": "./api/configs",
+      "@tella-controllers": "./api/controllers",
+      "@tella-routes": "./api/routes",
+      "@tella-models": "./api/models"
   }
 }

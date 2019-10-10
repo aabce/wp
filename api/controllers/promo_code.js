@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const promoCodeModel = mongoose.model('PromoCode');
-const roundNumber = require(`${__dirname}/../../../middleware/round_number.js`);
+const roundNumber = require(`@tella-utills/round_number.js`);
 
 const isArrayEmpty = array => array === undefined || array.length == 0 ? true : false;
 const isObjectEmpty = object => object === null || !Object.keys(object).length ? true : false;

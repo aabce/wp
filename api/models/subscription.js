@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.ObjectId;
 
 const subscriptionSchema = new mongoose.Schema({
+  isActive : {
+    type: Boolean,
+    default: false,
+    },
   title: {
     type: String,
     unique: true,

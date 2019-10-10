@@ -1,5 +1,7 @@
 'use strict';
+require('module-alias/register');
 
+const tellaParser = require('@tella-utills/parser');
 const configs = require(`${__dirname}/../configs/config.json`);
 const fetch = require('node-fetch');
 

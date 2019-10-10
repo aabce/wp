@@ -1,6 +1,6 @@
 'use strict';
-
-const emailConfigs = require(`${__dirname}/../configs/email.json`);
+require('module-alias/register');
+const emailConfigs = require(`@tella-configs/email.json`);
 const nodemailer = require('nodemailer');
 
 module.exports.sendRestoreCode = async (emailAddress, restoreCode) => {
@@ -14,6 +14,7 @@ module.exports.sendRestoreCode = async (emailAddress, restoreCode) => {
    };
 
   await transporter.sendMail(orderMessage);
+  console.log(`Email sent to ${ JSON.stringify(orderMessage) }`);
 };
 
 module.exports.sendRestoreMessage = async (emailAddress) => {

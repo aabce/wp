@@ -1,12 +1,12 @@
 'use strict';
 
-const configs = require(`${__dirname}/../../../configs/config.json`);
+const configs = require(`@tella-configs/config.json`);
 const mongoose = require('mongoose');
 const ObjectId = mongoose.ObjectId;
 const messageModel = mongoose.model('Message');
 const subscriberModel = mongoose.model('Subscriber');
-const agenda = require(`${__dirname}/../../../middleware/agenda.js`);
-const whatsApp = require(`${__dirname}/../../../middleware/whats_app.js`);
+const agenda = require(`@tella-utills/agenda.js`);
+const whatsApp = require(`@tella-utills/whats_app.js`);
 
 const isArrayEmpty = array => array === undefined || array.length == 0 ? true : false;
 const isObjectEmpty = object => object === null || !Object.keys(object).length ? true : false;
