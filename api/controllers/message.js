@@ -1,26 +1,24 @@
 'use strict';
-
-const configs = require(`@tella-configs/config.json`);
+require('module-alias/register');
 const mongoose = require('mongoose');
-const ObjectId = mongoose.ObjectId;
 const messageModel = mongoose.model('Message');
-const subscriberModel = mongoose.model('Subscriber');
+const userModel = mongoose.model('User');
 const agenda = require(`@tella-utills/agenda.js`);
-const whatsApp = require(`@tella-utills/whats_app.js`);
-
-const isArrayEmpty = array => array === undefined || array.length == 0 ? true : false;
-const isObjectEmpty = object => object === null || !Object.keys(object).length ? true : false;
+const whatsApp = require(`@tella-utills/whatsapp_notify.js`);
+const check = require(`@tella-utills/check.js`);
+const server_configs = require('@tella-configs/config.json');
+// const sendMail = require(`@tella-utills/email_notify.js`);
 
 
 
 const sendMessage = async (text, file) => {
-  const subscribers = await userModel.find({ is_subscribed: true }, 'phone first_name last_name');
+  const subscribers = await userModel.find({ subscriber: true }, 'phone first_name last_name');
   for (let subscriber of subscribers) {
     whatsApp.sendMessage(subscriber, text);
 
-    if (file){
-      whatsApp.sendFile(subscriber, file);
-    }
+    // if (file){
+    //   whatsApp.sendFile(subscriber, file);
+    // }
   }
 };
 
@@ -35,26 +33,27 @@ agenda.define('schedule_message', async (job) => {
 
 
 
-module.exports.selectAllMessages = async (req, res) => {
+module.exports.getAll = async (req, res) => {
   try {
-    const messages = await agenda.jobs({}, { _id: -1 });
+    const messages = await agenda.jobs({});
+    // const messages = await agenda.jobs({}, { _id: -1 });
     // let messages = await messageModel.find({}, '-__v');
-    isArrayEmpty(messages) ? res.status(404).send({ status: 'messages_not_found' }) : res.status(200).send(messages);
+    check.isArrayEmpty(messages) ? res.status(404).send({ error: 'messages_not_found' }) : res.status(200).send(messages);
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
 };
 
-module.exports.selectMessageById = async (req, res) => {
-  const messageId = req.params.message_id;
+module.exports.getById = async (req, res) => {
+  const messageId = req.params.id;
 
   if (mongoose.Types.ObjectId.isValid(messageId)) {
     try {
       const message = await agenda.jobs({ _id: mongoose.Types.ObjectId(messageId) });
       // let message = await messageModel.findById(messageId, '-__v');
 
-      if (isArrayEmpty(message)) {
-        res.status(404).send({ status: 'message_not_found' });
+      if (check.isArrayEmpty(message)) {
+        res.status(404).send({ error: 'message_not_found' });
       } else {
         res.status(200).send(message[0].attrs);
       }
@@ -66,9 +65,9 @@ module.exports.selectMessageById = async (req, res) => {
   }
 };
 
-module.exports.createMessage = async (req, res) => {
-  if (isObjectEmpty(req.body)) {
-    res.status(204).send({ status: 'payload_is_empty' });
+module.exports.create = async (req, res) => {
+  if (check.isObjectEmpty(req.body)) {
+    res.status(204).send({ error: 'payload_is_empty' });
   } else {
     const rawfileData = req.file || null;
 
@@ -79,13 +78,16 @@ module.exports.createMessage = async (req, res) => {
     if ( rawfileData ){
       
       file.originalname = rawfileData.originalname;
-      file.filename =  `http://localhost:5000/documents/${ rawfileData.filename }` ;
+      file.filename =  `http://${server_configs.server_host}:${server_configs.server_port}/documents/${ rawfileData.filename }` ;
       file.size = rawfileData.size;
       file.path = rawfileData.path;
       file.mimetype = rawfileData.mimetype;
     }
 
-
+    
+    // messageData.schedule_date = ( messageData.schedule_date ) ? messageData.schedule_date : Date.now();
+    // console.log(`MD:${JSON.stringify((messageData))}`);
+    
     try {
       const createdMessage = await agenda.schedule(
           new Date(messageData.schedule_date), 
@@ -95,7 +97,7 @@ module.exports.createMessage = async (req, res) => {
       // const createdMessage = await messageModel.create(messageData);
 
       res.status(200).send({
-        status: 'message_was_created',
+        message: 'message_was_created',
         id: createdMessage.attrs._id,
         scheduled_at: createdMessage.attrs.nextRunAt
       });
@@ -105,7 +107,7 @@ module.exports.createMessage = async (req, res) => {
   }
 };
 
-module.exports.updateMessageById = async (req, res) => {
+module.exports.update = async (req, res) => {
   if (isObjectEmpty(req.body)) {
     res.status(204).send({ status: 'payload_is_empty' });
   } else {
@@ -148,7 +150,7 @@ module.exports.updateMessageById = async (req, res) => {
   }
 };
 
-module.exports.deleteMessageById = async (req, res) => {
+module.exports.delete = async (req, res) => {
   const messageId = req.params.message_id;
 
   if (mongoose.Types.ObjectId.isValid(messageId)) {

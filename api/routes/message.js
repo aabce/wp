@@ -1,9 +1,12 @@
 'use strict';
 require('module-alias/register');
+
 const express = require('express');
 const router = express.Router();
-
 const multer = require('multer');
+const jwt = require('@tella-middlewares/jwt');
+const perms = require('@tella-middlewares/perms');
+const messageController = require(`@tella-controllers/message.js`);
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -25,18 +28,14 @@ var storage = multer.diskStorage({
       cb(null, 'image-' + Date.now() + '.' + filetype);
     }
 });
+
 var upload = multer({storage: storage});
 
-const messageController = require(`${__dirname}/../controllers/message.js`);
 
-router.get('/subscription/message/get_messages', messageController.selectAllMessages);
-router.get('/subscription/message/get_message/:message_id', messageController.selectMessageById);
-router.post(
-    '/subscription/message/create_message', 
-    upload.single('doc'), 
-    messageController.createMessage
-    );
-router.put('/subscription/message/update_message/:message_id', messageController.updateMessageById);
-router.delete('/subscription/message/delete_message/:message_id', messageController.deleteMessageById);
+router.get('/msg', jwt.verifyJWT, perms.admin(true), messageController.getAll);
+router.get('/msg/:id', jwt.verifyJWT, perms.admin(true), messageController.getById);
+router.post('/msg', jwt.verifyJWT, perms.admin(true), upload.single('doc'),messageController.create);
+// router.put('/msg/:id', jwt.verifyJWT, perms.admin(true), messageController.update);
+router.delete('/msg/:id', jwt.verifyJWT, perms.admin(true), messageController.delete);
 
 module.exports = router;

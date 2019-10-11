@@ -39,6 +39,6 @@ require(`@tella-models/settings.js`);
 require(`@tella-models/account.js`);
 require(`@tella-models/promocode.js`);
 require(`@tella-models/subscription.js`);
-// require(`@tella-models/message.js`);
+require(`@tella-models/message.js`);
 
 process.on('SIGINT', onTerminate).on('SIGTERM', onTerminate);

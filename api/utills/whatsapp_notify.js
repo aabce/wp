@@ -1,17 +1,28 @@
 'use strict';
 require('module-alias/register');
-
+const mongoose = require('mongoose');
 const tellaParser = require('@tella-utills/parser');
-const configs = require(`${__dirname}/../configs/config.json`);
+const settingsModel = mongoose.model('Settings');
 const fetch = require('node-fetch');
-
-const APIURL = configs.whats_app.api_url;
-const TOKEN = configs.whats_app.token;
 
 const messageView = (text, first_name, last_name) => `Уважаемый подписчик _${first_name}_ _${last_name}_\n\n${text}`;
 
+
+const wp_configs = async () => {
+  try{
+    let settings = await settingsModel.find().limit(1);
+    console.log(`CONF:${JSON.stringify(settings)}`);
+    return settings[0].wp
+  }catch( err ){
+    console.log(`WP_ERR:${err}`);
+    return null;
+  }
+}
+
 module.exports.sendMessage = async (subscriber, text) => {
-  const url = `${APIURL}sendMessage?token=${TOKEN}`;
+  const configs = await wp_configs();
+  const url = `${configs.api_url}sendMessage?token=${configs.token}`;
+  console.log(`url:${JSON.stringify(url)}`);
   const message = messageView(text, subscriber.first_name, subscriber.last_name);
   const data = {
     phone: subscriber.phone,
@@ -27,14 +38,16 @@ module.exports.sendMessage = async (subscriber, text) => {
   try {
     const response = await fetch(url, body);
     const json = await response.json();
-    console.log(json);
+    console.log(`good:${JSON.stringify(json)}`);
   } catch (err) {
     console.log(err);
   }
 };
 
 module.exports.sendFile = async (subscriber, file) => {
-  const url = `${APIURL}sendFile?token=${TOKEN}`;
+  const configs = wp_configs();
+  const url = `${configs.api_url}sendFile?token=${configs.token}`;
+  
   let msg = {
     phone: subscriber.phone,
     body: file.filename, //"http://putregai.com/sbooks/clean_arch.pdf"
@@ -58,7 +71,8 @@ module.exports.sendFile = async (subscriber, file) => {
 };
 
 module.exports.readMessages = async () => {
-  const url = `${APIURL}messages?token=${TOKEN}`;
+  const configs = wp_configs();
+  const url = `${configs.api_url}messages?token=${configs.token}`;
 
   try {
     const response = await fetch(url);

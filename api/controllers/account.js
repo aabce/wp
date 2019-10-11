@@ -3,6 +3,7 @@ require('module-alias/register');
 const configs = require(`@tella-configs/config.json`);
 const mongoose = require('mongoose');
 const userModel = mongoose.model('User');
+const subscriptionModel = mongoose.model('Subscription');
 const promocodeModel = mongoose.model('Promocode');
 const passwordManager = require(`@tella-utills/gen_password.js`);
 const jwtManager = require(`@tella-utills/jwt.js`);
@@ -272,7 +273,6 @@ module.exports.selectSubscriberById = async (req, res) => {
   }
 };
 
-
 module.exports.updateSubscriberById = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
     res.status(400).send({ error: 'payload_is_empty' });
@@ -292,13 +292,13 @@ module.exports.updateSubscriberById = async (req, res) => {
     subscriberData.is_subscribed = false;
 
     const data = {
-      $set: subscriberData
+      $unset: subscriberData
     };
 
     const options = {
       upsert: false,
       new: true,
-      runValidators: true
+      runValidators: false
     };
 
     try {
@@ -385,27 +385,25 @@ module.exports.getSubscriptionById = async (req, res) => {
   }
 };
 
-
 module.exports.extendSubscription = async (req, res) => {
   const subscriberId = req.user_id;
   const code = req.body.promocode;
 
   if (!code){
-    res.status(400).send({error:'promocode_not_provided'});
-    return;
+    const promocode = await promocodeModel.findOne({ code: code });
+
+    if (!promocode){
+      res.status(400).send({error:'promocode_not_provided'});
+      return;
+    }
+    
+    if (promocode.expires_date > Date.now() ){
+      res.status(400).send({error:'promocode_not_valid'});
+      return;
+    }
   }
 
-  const promocode = await promocodeModel.findOne({ code: code });
 
-  if (!promocode){
-    res.status(400).send({error:'promocode_not_provided'});
-    return;
-  }
-
-  if (promocode.expires_date > Date.now() ){
-    res.status(400).send({error:'promocode_not_valid'});
-    return;
-  }
 
   const currentDateString = Date();
 
@@ -430,6 +428,42 @@ module.exports.extendSubscription = async (req, res) => {
   });
 };
 
+module.exports.computePayment = async (req, res) => {
+  const subscriberId = req.user_id;
+  const code = req.body.promocode;
+  const discount = 0;
+  
+  console.log(`S=${code}`);
+  if (!code){
+    const promocode = await promocodeModel.findOne({ code: code });
+
+    if (!promocode){
+      res.status(400).send({error:'promocode_not_provided'});
+      return;
+    }
+    
+    if (promocode.expires_date > Date.now() ){
+      res.status(400).send({error:'promocode_not_valid'});
+      return;
+    }
+    discount = (promocode.discount) ? promocode.discount : discount;
+  }
+
+  let subscr = null;
+  try{
+    let query = await subscriptionModel.find().limit(1);
+     subscr = query[0];
+  }catch(er){
+    res.status(400).send({error:'subscription_not_found'});
+    return;
+  }
+
+  let cost = (discount>0) ? subscr.prices.amount*(discount/100) : subscr.prices.amount;
+  res.status(200).send({
+    message: 'payment_ready',
+    cost:cost
+  });
+}
 
 // Test
 

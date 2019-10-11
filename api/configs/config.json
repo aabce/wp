@@ -1,5 +1,6 @@
 {
    "server_port": 5000,
+   "server_host":"localhost",
    "salt":"",
    "mongodb": {
       "url": "mongodb://192.168.99.100:27017/wp",

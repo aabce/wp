@@ -13,8 +13,8 @@ const settingsRoutes = require(`@tella-routes/settings.js`);
 const accountRoutes = require(`@tella-routes/account.js`);
 const promoCodeRoutes = require(`@tella-routes/promocode.js`);
 const subscriptionRoutes = require(`@tella-routes/subscription.js`);
+const messageRoutes = require(`@tella-routes/message.js`);
 
-// const messageRoutes = require(`@tella-routes/message.js`);
 
 const app = express();
 const serverPort = process.env.PORT || configs.server_port;
@@ -36,7 +36,7 @@ app.use('/api', settingsRoutes);
 app.use('/api', accountRoutes);
 app.use('/api', promoCodeRoutes);
 app.use('/api', subscriptionRoutes);
-// app.use('/api', messageRoutes);
+app.use('/api', messageRoutes);
 
 app.use((req, res, next) => res.status(404).send({url: req.url, message: `route_not_found`})); // 404.
 app.use((err, req, res, next) => res.status(500).send({error: err.message})); // 500.
