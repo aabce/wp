@@ -4,21 +4,31 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.ObjectId;
 
 const promoCodeSchema = new mongoose.Schema({
-  promo_code: {
+  is_active: {
+    type: Boolean,
+    default:true,
+  },
+
+  code: {
     type: String,
     unique: true,
   },
-  discount_rate: {
+  discount: {
     type: Number,
     min: 0,
     max: 100,
   },
-  expires_date: {
+  exp: {
     type: Date,
   },
-  number_of_uses: {
+  total: {
     type: Number,
+    default: 0,
+  },
+  counter: {
+    type: Number,
+    default: 0
   }
 });
 
-mongoose.model('PromoCode', promoCodeSchema, 'promo_codes');
+mongoose.model('Promocode', promoCodeSchema, 'promocodes');

@@ -14,7 +14,7 @@ const isObjectEmpty = object => object === null || !Object.keys(object).length ?
 
 
 const sendMessage = async (text, file) => {
-  const subscribers = await subscriberModel.find({ is_subscribed: true }, 'phone first_name last_name');
+  const subscribers = await userModel.find({ is_subscribed: true }, 'phone first_name last_name');
   for (let subscriber of subscribers) {
     whatsApp.sendMessage(subscriber, text);
 

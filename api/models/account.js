@@ -59,15 +59,16 @@ const userSchema = new mongoose.Schema({
     // subscription
     subscriber: {
       type: Boolean,
+      default: false,
     },
 
-    subscription: {
-      starts: {
-        type: Date,
-      },
-      ends: {
-        type: Date,
-      }
+    subscription_starts: {
+      type: Date,
+      default:Date.now(),
+    },
+    subscription_ends: {
+      type: Date,
+      default:Date.now(),
     },
 
   is_admin:{

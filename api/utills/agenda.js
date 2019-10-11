@@ -1,6 +1,7 @@
 'use strict';
+require('module-alias/register');
 
-const configs = require(`${__dirname}/../configs/config.json`);
+const configs = require(`@tella-configs/config.json`);
 const Agenda = require('agenda');
 
 const agenda = new Agenda({ db: { address: configs.mongodb.url, collection: 'messages' } });

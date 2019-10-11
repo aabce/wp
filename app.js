@@ -9,10 +9,12 @@ const cors = require('cors');
 
 const bodyParser = require('body-parser');
 
+const settingsRoutes = require(`@tella-routes/settings.js`);
 const accountRoutes = require(`@tella-routes/account.js`);
-// const subscriptionRoutes = require(`@tella-routes/subscription.js`);
+const promoCodeRoutes = require(`@tella-routes/promocode.js`);
+const subscriptionRoutes = require(`@tella-routes/subscription.js`);
+
 // const messageRoutes = require(`@tella-routes/message.js`);
-// const promoCodeRoutes = require(`@tella-routes/promo_code.js`);
 
 const app = express();
 const serverPort = process.env.PORT || configs.server_port;
@@ -30,10 +32,11 @@ app.use('/documents',express.static('fileStore'));
 app.get('/', (req, res, next) => res.status(200).send({url: req.url, message: `server_is_running`})); //200.
 
 // controllers
+app.use('/api', settingsRoutes);
 app.use('/api', accountRoutes);
-// app.use('/api', subscriberRoutes);
+app.use('/api', promoCodeRoutes);
+app.use('/api', subscriptionRoutes);
 // app.use('/api', messageRoutes);
-// app.use('/api', promoCodeRoutes);
 
 app.use((req, res, next) => res.status(404).send({url: req.url, message: `route_not_found`})); // 404.
 app.use((err, req, res, next) => res.status(500).send({error: err.message})); // 500.

@@ -36,7 +36,7 @@ module.exports.adminOrSelf = () =>{
    
     if (user && user.is_admin){
       console.log(`ALLOWED`);
-      req.user_id = req.query.subscriber_id || user._id;
+      req.user_id = req.params.id || user._id;
       next();
     
     }else if ( user ){

@@ -35,10 +35,10 @@ mongoose.connection.on('disconnected', () => {
   console.log('INFO', `MongoDB Disconnected`);
 });
 // remote configs // thi.reference
-
+require(`@tella-models/settings.js`);
 require(`@tella-models/account.js`);
-// require(`@tella-models/subscription.js`);
+require(`@tella-models/promocode.js`);
+require(`@tella-models/subscription.js`);
 // require(`@tella-models/message.js`);
-// require(`@tella-models/promo_code.js`);
 
 process.on('SIGINT', onTerminate).on('SIGTERM', onTerminate);

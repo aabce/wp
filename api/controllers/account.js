@@ -3,22 +3,23 @@ require('module-alias/register');
 const configs = require(`@tella-configs/config.json`);
 const mongoose = require('mongoose');
 const userModel = mongoose.model('User');
+const promocodeModel = mongoose.model('Promocode');
 const passwordManager = require(`@tella-utills/gen_password.js`);
 const jwtManager = require(`@tella-utills/jwt.js`);
 const check = require(`@tella-utills/check.js`);
-const sendPasswordMail = require(`@tella-utills/send_password_email.js`);
-
+const sendMail = require(`@tella-utills/email_notify.js`);
+const addMonthToDate = (date, month) => new Date(date.setMonth(date.getMonth() + month));
 
 module.exports.signup = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
-    res.status(204).send({ status: 'payload_is_empty' });
+    res.status(400).send({ error: 'payload_is_empty' });
   } else {
-    const subscriberID = req.query.subscriber_id;
+    const subscriberID = req.params.id;
     const subscriberData = req.body;
 
     
     if (subscriberData.password === undefined) {
-        res.status(400).send({ status: 'password_not_provided' });
+        res.status(400).send({ error: 'password_not_provided' });
         return
       }
       
@@ -46,10 +47,10 @@ module.exports.signup = async (req, res) => {
       let updatedSubscriber = await userModel.findOneAndUpdate({ _id : mongoose.Types.ObjectId(subscriberID)}, data, options);
 
       if (check.isObjectEmpty(updatedSubscriber)) {
-        res.status(404).send({ status: 'subscriber_not_found' });
+        res.status(404).send({ error: 'subscriber_not_found' });
       } else {
         res.status(200).send({
-          status: 'subscriber_was_updated',
+          message: 'subscriber_was_updated',
           subscriber_id: updatedSubscriber._id
         });
       }
@@ -59,9 +60,9 @@ module.exports.signup = async (req, res) => {
         const path = pathRegex ? pathRegex[1] : '';
         res.status(422).send({ status: 'key_already_exists', fields: path.replace(/_|1/g,'') });
       } else if (err.name === 'ValidationError') {
-        res.status(400).send({ status: 'fields_are_required', fields: Object.keys(err.errors)});
+        res.status(400).send({ error: 'fields_are_required', fields: Object.keys(err.errors)});
       } else {
-        res.status(400).send({ status: err.message });
+        res.status(400).send({ error: err.message });
       }
     }
   }
@@ -69,12 +70,12 @@ module.exports.signup = async (req, res) => {
 
 module.exports.signin = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
-    res.status(204).send({ status: 'payload_is_empty' });
+    res.status(400).send({ error: 'payload_is_empty' });
   } else {
     let subscriber = await userModel.findOne({ email: req.body.email }, '_id email password salt');
     console.log(JSON.stringify(subscriber));
     if (check.isObjectEmpty(subscriber)) {
-      res.status(401).send({ status: 'invalid_email_or_password' });
+      res.status(400).send({ error: 'invalid_email_or_password' });
     } else {
       try {
         const computedPassword = passwordManager.getHashPassword(req.body.password, subscriber.salt);
@@ -84,10 +85,10 @@ module.exports.signin = async (req, res) => {
           const subscriberJwt = jwtManager.createJWT({ _id: subscriber._id, email: subscriber.email });
           console.log(`TOKE1=${ JSON.stringify( subscriberJwt ) }`);
           await userModel.findByIdAndUpdate(subscriber._id, { token: subscriberJwt } );
-          let updated_sub = await userModel.findOne({ _id: subscriber._id }, '_id token');
-          res.status(200).send({ token: updated_sub.token, id: updated_sub._id });
+          let updated_sub = await userModel.findOne({ _id: subscriber._id }).select('-password -salt');
+          res.status(200).send(updated_sub);
         } else {
-          res.status(401).send({ status: 'invalid_email_or_password' });
+          res.status(400).send({ error: 'invalid_email_or_password' });
         }
       } catch (err) {
         res.status(400).send({ error: err.message });
@@ -98,22 +99,27 @@ module.exports.signin = async (req, res) => {
 
 module.exports.forgotPassword = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
-    res.status(204).send({ status: 'payload_is_empty' });
+    res.status(400).send({ error: 'payload_is_empty' });
   } else {
-    let subscriber = await userModel.findOne({ email: req.body.email }, '_id');
+    let subscriber = await userModel.findOne({ email: req.body.email }, '_id email');
 
     const randomCode = passwordManager.getRandomCode(8);
     const expTime = Date.now() + 300000;
 
     if (check.isObjectEmpty(subscriber)) {
-      res.status(404).send({ status: 'subscriber_not_found' });
+      res.status(404).send({ error: 'subscriber_not_found' });
     } else {
       try {
         await userModel.findByIdAndUpdate(subscriber._id, { reset_code: randomCode, reset_exp: expTime } );
 
-        sendPasswordMail.sendRestoreCode(subscriber.email, randomCode);
+        // console.log(`USER==${ subscriber }`);
 
-        res.status(200).send({ code: randomCode, id: subscriber._id });
+        let status = sendMail.sendRestoreCode(subscriber.email, randomCode);
+        if (status){
+          res.status(200).send({ message: 'code_sent', id: subscriber._id });
+        }else{
+          res.status(500).send({ error: 'invalid_settings' });
+        }
       } catch (err) {
         res.status(400).send({ error: err.message });
       }
@@ -123,12 +129,12 @@ module.exports.forgotPassword = async (req, res) => {
 
 module.exports.restorePassword = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
-    res.status(204).send({ status: 'payload_is_empty' });
+    res.status(400).send({ error: 'payload_is_empty' });
   } else {
     let subscriber = await userModel.findOne({ reset_code: req.body.code });
 
     if (check.isObjectEmpty(subscriber)) {
-      res.status(404).send({ status: 'invalid_code' });
+      res.status(400).send({ error: 'invalid_code' });
     } else {
       if (subscriber.reset_exp > Date.now()) {
         try {
@@ -147,7 +153,7 @@ module.exports.restorePassword = async (req, res) => {
 
 module.exports.resetPassword = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
-    res.status(204).send({ error: 'payload_is_empty' });
+    res.status(400).send({ error: 'payload_is_empty' });
   } else {
     const subscriberData = req.body;
 
@@ -166,13 +172,19 @@ module.exports.resetPassword = async (req, res) => {
 
 
     if (check.isObjectEmpty(subscriber)) {
-      res.status(404).send({ error: 'invalid_token' });
+      res.status(400).send({ error: 'invalid_token' });
     } else {
       try {
           const newPasswordData = passwordManager.genHashPassword(subscriberData.password);
           await userModel.findByIdAndUpdate(subscriber._id, { password: newPasswordData.password, salt: newPasswordData.salt } );
-          sendPasswordMail.sendRestoreMessage(subscriber.email);
-          res.status(200).send({ status: 'password_has_been_changed' });
+
+          let status = sendMail.sendRestoreMessage(subscriber.email);
+          if (status){
+            res.status(200).send({ message: 'password_has_been_changed' });
+          }else{
+            res.status(500).send({ error: 'invalid_settings' });
+          }
+
       } catch (err) {
         res.status(400).send({ error: err.message });
       }
@@ -182,32 +194,32 @@ module.exports.resetPassword = async (req, res) => {
 
 module.exports.changePassword = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
-    res.status(204).send({ status: 'payload_is_empty' });
+    res.status(400).send({ error: 'payload_is_empty' });
   } else {
     const subscriberData = req.body;
 
     
     if (!subscriberData.new_password) {
-      res.status(400).send({ status: 'passwords_not_match' });
+      res.status(400).send({ error: 'passwords_not_match' });
       return 0;
     }
 
     let subscriber = await userModel.findOne({ _id: req.decoded._id });
 
     if (check.isObjectEmpty(subscriber)) {
-      res.status(404).send({ status: 'subscriber_not_found' });
+      res.status(404).send({ error: 'subscriber_not_found' });
     } else {
       try {
         const oldPasswordData = passwordManager.genHashPasswordWithSalt(subscriberData.old_password, subscriber.salt);
       
         if (oldPasswordData.password !== subscriber.password) {
-          res.status(400).send({ status: 'passwords_not_match' });
+          res.status(400).send({ error: 'passwords_not_match' });
           return 0;
         } else {
           const newPasswordData = passwordManager.genHashPassword(subscriberData.new_password);
           await userModel.findByIdAndUpdate(subscriber._id, { password: newPasswordData.password, salt: newPasswordData.salt } );
-          sendPasswordMail.sendRestoreMessage(subscriber.email);
-          res.status(200).send({ status: 'password_has_been_changed' });
+          sendMail.sendRestoreMessage(subscriber.email);
+          res.status(200).send({ message: 'password_has_been_changed' });
         }
       } catch (err) {
         res.status(400).send({ error: err.message });
@@ -217,16 +229,17 @@ module.exports.changePassword = async (req, res) => {
 };
 
 module.exports.deleteSubscriberById = async (req, res) => {
-  const subscriber_id = req.query.subscriber_id;
+  const subscriber_id = req.params.id;
+  
 
   try {
     let deletedSubscriber = await userModel.findOneAndDelete({ _id: subscriber_id });
 
     if (check.isObjectEmpty(deletedSubscriber)) {
-      res.status(404).send({ status: 'subscriber_not_found' });
+      res.status(404).send({ error: 'subscriber_not_found' });
     } else {
       res.status(200).send({
-        status: 'subscriber_was_deleted',
+        message: 'subscriber_was_deleted',
         subscriber_id: deletedSubscriber._id
       });
     }
@@ -238,7 +251,7 @@ module.exports.deleteSubscriberById = async (req, res) => {
 module.exports.selectAllSubscribers = async (req, res) => {
   try {
     let subscribers = await userModel.find({}, '-__v');
-    check.isArrayEmpty(subscribers) ? res.status(404).send({ status: 'subscribers_not_found' }) : res.status(200).send(subscribers);
+    check.isArrayEmpty(subscribers) ? res.status(404).send({ error: 'subscribers_not_found' }) : res.status(200).send(subscribers);
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
@@ -250,7 +263,7 @@ module.exports.selectSubscriberById = async (req, res) => {
   try {
     let subscriber = await userModel.findOne({ _id: subscriberId }, '-__v');
     if (check.isObjectEmpty(subscriber)) {
-      res.status(404).send({ status: 'subscriber_not_found' });
+      res.status(404).send({ error: 'subscriber_not_found' });
     } else {
       res.status(200).send(subscriber);
     }
@@ -262,13 +275,13 @@ module.exports.selectSubscriberById = async (req, res) => {
 
 module.exports.updateSubscriberById = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
-    res.status(204).send({ status: 'payload_is_empty' });
+    res.status(400).send({ error: 'payload_is_empty' });
   } else {
     const subscriberId = req.user_id;
     const subscriberData = req.body;
 
     if (subscriberData.password === undefined) {
-      res.status(400).send({ status: 'password_not_provided' });
+      res.status(400).send({ error: 'password_not_provided' });
       return 0;
     }
 
@@ -315,12 +328,12 @@ module.exports.updateSubscriberById = async (req, res) => {
 
 module.exports.createSubscriber = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
-    res.status(204).send({ status: 'payload_is_empty' });
+    res.status(400).send({ error: 'payload_is_empty' });
   } else {
     const subscriberData = req.body;
 
     if (subscriberData.password === undefined) {
-      res.status(400).send({ status: 'password_not_provided' });
+      res.status(400).send({ error: 'password_not_provided' });
       return 0;
     }
 
@@ -333,23 +346,23 @@ module.exports.createSubscriber = async (req, res) => {
    
 
   
-    console.log(`DATA = ${JSON.stringify(subscriberData)}`);
+    // console.log(`DATA = ${JSON.stringify(subscriberData)}`);
     try {
       let updatedSubscriber = await userModel.create(subscriberData);
 
         res.status(200).send({
-          status: 'subscriber_was_created',
+          message: 'subscriber_was_created',
           subscriber_id: updatedSubscriber._id
         });
     } catch (err) {
       if (err.name === 'MongoError' && err.code === 11000) {
         const pathRegex = err.message.match(/(?<=\bindex:\s)(\w+)/)
         const path = pathRegex ? pathRegex[1] : '';
-        res.status(422).send({ status: 'key_already_exists', fields: path.replace(/_|1/g,'') });
+        res.status(400).send({ error: 'key_already_exists', fields: path.replace(/_|1/g,'') });
        } else if (err.name === 'ValidationError') {
-        res.status(400).send({ status: 'fields_are_required', fields: Object.keys(err.errors)});
+        res.status(400).send({ error: 'fields_are_required', fields: Object.keys(err.errors)});
       } else {
-        res.status(400).send({ status: err.message });
+        res.status(400).send({ error: err.message });
       }
     }
   }
@@ -363,7 +376,7 @@ module.exports.getSubscriptionById = async (req, res) => {
   try {
     let subscriber = await userModel.findOne({ _id: subscriberId }, 'subscriber subscription');
     if (check.isObjectEmpty(subscriber)) {
-      res.status(404).send({ status: 'subscription_not_found' });
+      res.status(404).send({ error: 'subscription_not_found' });
     } else {
       res.status(200).send(subscriber);
     }
@@ -373,36 +386,49 @@ module.exports.getSubscriptionById = async (req, res) => {
 };
 
 
+module.exports.extendSubscription = async (req, res) => {
+  const subscriberId = req.user_id;
+  const code = req.body.promocode;
 
-// module.exports.extendSubscription = async (req, res) => {
-//   const subscriberPhone = req.params.subscriber_phone;
+  if (!code){
+    res.status(400).send({error:'promocode_not_provided'});
+    return;
+  }
 
-//   const currentDateString = Date();
+  const promocode = await promocodeModel.findOne({ code: code });
 
-//   const currentDate = new Date(currentDateString);
-//   const newDate = addMonthToDate(new Date(currentDateString), 1);
+  if (!promocode){
+    res.status(400).send({error:'promocode_not_provided'});
+    return;
+  }
 
-//   const data = {
-//     $set: {
-//       is_subscribed: true,
-//       subscription_date: currentDate,
-//       subscription_expires: newDate
-//     }
-//   };
+  if (promocode.expires_date > Date.now() ){
+    res.status(400).send({error:'promocode_not_valid'});
+    return;
+  }
 
-//   const options = {
-//     upsert: false,
-//     new: true,
-//     runValidators: true
-//   };
+  const currentDateString = Date();
 
-//   let updatedSubscriber = await subscriberModel.findOneAndUpdate({ phone: subscriberPhone }, data, options);
+  const currentDate = new Date(currentDateString);
+  const newDate = addMonthToDate(new Date(currentDateString), 1);
 
-//   res.status(200).send({
-//     status: 'subscriber_was_updated'
-//   });
-// };
+  const data = {
+      subscriber: true,
+      subscription_starts: currentDate,
+      subscription_ends: newDate
+  };
 
+  const options = {
+    upsert: false,
+    new: true,
+    runValidators: true
+  };
+
+  let updatedSubscriber = await userModel.findOneAndUpdate({ _id: subscriberId }, data, options);
+  res.status(200).send({
+    message: 'subscription_extended'
+  });
+};
 
 
 // Test

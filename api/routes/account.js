@@ -16,17 +16,18 @@ router.post('/subscriber/reset', accountsController.resetPassword);
 
 // admin
 router.post('/subscriber/create', jwt.verifyJWT, perms.admin(true), accountsController.createSubscriber);
-router.delete('/subscriber/delete', jwt.verifyJWT, perms.admin(true), accountsController.deleteSubscriberById);
-router.get('/subscriber/all', jwt.verifyJWT, perms.admin(true), accountsController.selectAllSubscribers);
+router.delete('/subscriber/:id', jwt.verifyJWT, perms.admin(true), accountsController.deleteSubscriberById);
+router.get('/subscriber', jwt.verifyJWT, perms.admin(true), accountsController.selectAllSubscribers);
 
 // admin user
 router.get('/subscriber', jwt.verifyJWT, perms.adminOrSelf() , accountsController.selectSubscriberById);
 router.post('/subscriber/change', jwt.verifyJWT, perms.adminOrSelf(), accountsController.changePassword);
-router.put('/subscriber/update', jwt.verifyJWT, perms.adminOrSelf(), accountsController.updateSubscriberById);
+router.put('/subscriber/:id', jwt.verifyJWT, perms.adminOrSelf(), accountsController.updateSubscriberById);
 router.get('/subscriber/subscription', jwt.verifyJWT, perms.adminOrSelf(), accountsController.getSubscriptionById);
 
-// extendSubscription
-// router.post('/subscriber/subscription', jwt.verifyJWT, perms.adminOrSelf(), accountsController.extendSubscription);
+// extendSubscription 
+router.post('/subscriber/subscription', jwt.verifyJWT, perms.adminOrSelf(), accountsController.extendSubscription);
+
 
 
 

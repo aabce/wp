@@ -4,13 +4,12 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.ObjectId;
 
 const subscriptionSchema = new mongoose.Schema({
-  isActive : {
+  is_active : {
     type: Boolean,
-    default: false,
+    default: true,
     },
   title: {
     type: String,
-    unique: true,
   },
   prices: {
     amount: {
@@ -19,11 +18,10 @@ const subscriptionSchema = new mongoose.Schema({
     currency: {
       type: String,
     },
-    discount_amount: {
-      type: Number,
-      default: 0,
-    }
   }
+},
+{
+  timestamps: true
 });
 
 mongoose.model('Subscription', subscriptionSchema, 'subscriptions');
