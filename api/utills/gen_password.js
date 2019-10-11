@@ -10,6 +10,16 @@ function sha256(password, salt) {
   return crypto.createHmac('sha256', salt).update(password).digest('hex');
 }
 
+module.exports.salt = (length) => {
+  return generateSalt(length);
+}
+
+
+module.exports.sign = (payload, salt) => {
+  return crypto.createHmac('md5', salt).update(payload).digest('hex');
+}
+
+
 module.exports.genHashPassword = (plainPassword) => {
   const salt = generateSalt(32);
   const password = sha256(plainPassword, salt);

@@ -458,15 +458,42 @@ module.exports.computePayment = async (req, res) => {
     return;
   }
 
+  let salt = passwordManager.salt(32);
+  let payment_request = [
+    { pg_merchant_id: 520369 },
+    { pg_amount: 120 },
+    { pg_currency: 'KZT'},
+    { pg_description: 'Moon Service' },
+    { pg_salt: salt },
+    { pg_language: 'ru' },
+    { secret_key: 'SU4vL4w6xTK7UKoU' }
+        ]
+  
+        let keys = []
+        payment_request.map( item => { keys.push( Object.keys(item)[0] ) });
+        let sorted = []
+        keys.sort().forEach( key => {
+          let a = payment_request.filter( item => Object.keys(item)[0] === key );
+          sorted.push(...a);
+        });
+
+    console.log( sorted );
+
   let cost = (discount>0) ? subscr.prices.amount*(discount/100) : subscr.prices.amount;
   res.status(200).send({
     message: 'payment_ready',
-    cost:cost
+    cost:cost,
+    url: `https://api.paybox.money/payment.php`
+          +`?pg_merchant_id=${ '520369' }`
+          +`&pg_amount=${ 120 }`
+          +`&pg_currency=${ 'KZT' }`
+          +`&pg_description=${ 'Moon' }`
+          +`&pg_salt=${ 'AcxoGvfVCNraR8KL' }`
+          +`&pg_language=ru`
+          +`&pg_sig=${ 'd6434f57a0d87bea40c2d7ede4bae6be' }`
   });
 }
-
 // Test
-
 module.exports.auth = async (req, res) => {
 try{
   console.log('AUTHORIZED');
