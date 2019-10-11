@@ -86,7 +86,7 @@ module.exports.signin = async (req, res) => {
           console.log(`TOKE1=${ JSON.stringify( subscriberJwt ) }`);
           await userModel.findByIdAndUpdate(subscriber._id, { token: subscriberJwt } );
           let updated_sub = await userModel.findOne({ _id: subscriber._id }).select('-password -salt -token');
-          res.status(200).send({user: updated_sub, token:token});
+          res.status(200).send({user: updated_sub, token:subscriberJwt});
         } else {
           res.status(400).send({ error: 'invalid_email_or_password' });
         }
