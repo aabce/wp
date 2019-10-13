@@ -3,7 +3,7 @@
    "server_host":"localhost",
    "salt":"",
    "mongodb": {
-      "url": "mongodb://192.168.99.100:27017/wp",
+      "url": "mongodb://localhost:27017/wp",
       "options": {
          "useCreateIndex": true,
          "useNewUrlParser": true,
