@@ -19,7 +19,7 @@
      "secret": "test",
      "options": {
        "issuer": "admin",
-       "expiresIn": "1h"
+       "expiresIn": "2h"
      }
    }
 }
