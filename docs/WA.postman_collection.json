@@ -1,329 +1,17 @@
 {
 	"info": {
-		"_postman_id": "771ff194-7387-4ef0-b6a5-c01ccb38c0c4",
-		"name": "WA",
+		"_postman_id": "1b6d2638-3c93-4eba-9168-525a73dfadb5",
+		"name": "Tella WA",
+		"description": "#### Whatsapp backend   \n   \n### Schedullers:\n\n- 1/day\n  - Checks if promocode is expired or not\n  - Checks if subscribers subscription expires whithin n-days (configured by admin)   \n- Last day of month\n  - Unlockes phone change   \n- 1/min\n  - Message sender   \n\n### PayBox Payment system is used",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Subscription",
+			"name": "Subscriber",
 			"item": [
 				{
-					"name": "Subscriber",
+					"name": "Change forgoten password",
 					"item": [
-						{
-							"name": "Get All Customers",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/get_subscribers",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"get_subscribers"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Customer By ID",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/get_subscriber/:subscriber_phone",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"get_subscriber",
-										":subscriber_phone"
-									],
-									"variable": [
-										{
-											"key": "subscriber_phone",
-											"value": "+77777777775"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Customer Subscription",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/get_subscription/:subscriber_phone",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"get_subscription",
-										":subscriber_phone"
-									],
-									"variable": [
-										{
-											"key": "subscriber_phone",
-											"value": "+77777777"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Pay Customer Subscription",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/pay_subscription/:subscriber_phone",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"pay_subscription",
-										":subscriber_phone"
-									],
-									"variable": [
-										{
-											"key": "subscriber_phone",
-											"value": "87052054400"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update Customer by ID",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"first_name\": \"s\",\n    \"last_name\": \"a\",\n    \"email\": \"s@f.de\",\n    \"phone\": \"+777231123374121\",\n    \"password\": \"12345\",\n    \"confirm_password\": \"12345\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/update_subscriber/:subscriber_phone",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"update_subscriber",
-										":subscriber_phone"
-									],
-									"variable": [
-										{
-											"key": "subscriber_phone",
-											"value": "+77777777775"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete Customer by ID",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/delete_subscriber/:subscriber_phone",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"delete_subscriber",
-										":subscriber_phone"
-									],
-									"variable": [
-										{
-											"key": "subscriber_phone",
-											"value": "+77777777775"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Sign up(Create Customer)",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"first_name\": \"s\",\n    \"last_name\": \"a\",\n    \"email\": \"lupe36@ethereal.email\",\n    \"phone\": \"+77777777\",\n    \"password\": \"12345\",\n    \"confirm_password\": \"12345\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/sign_up",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"sign_up"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Sign in(Enter to the System)",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phone\": \"+77052054400\",\n    \"password\": \"12345\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/sign_in",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"sign_in"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Sign out(Exit from the System)",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDhiMzljOTY0YjhkOGU2YzNjMzViODIiLCJwaG9uZSI6Iis3Nzc3Nzc3NyIsImlhdCI6MTU2OTQwNTM5OSwiZXhwIjoxNTY5NDA4OTk5LCJpc3MiOiJhZG1pbiJ9.MAWEskh4ErIUFuKayljFLu7mMwdjUI47ViVySFNaEBk",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/sign_out",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"sign_out"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Change Password",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"phone\": \"+77052054400\",\n\t\"old_password\": \"12345\",\n\t\"new_password\": \"12345\",\n\t\"confirm_password\": \"12345\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/change",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscriber",
-										"change"
-									]
-								}
-							},
-							"response": []
-						},
 						{
 							"name": "Forgot Password",
 							"request": {
@@ -338,26 +26,148 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"phone\": \"+77052054400\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n\t\"email\": \"andres.muller44@ethereal.email\"\n}"
 								},
 								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/forgot",
+									"raw": "{{API_URL}}/subscriber/forgot",
 									"host": [
-										"{{Local Host URL}}"
+										"{{API_URL}}"
 									],
 									"path": [
-										"subscription",
 										"subscriber",
 										"forgot"
 									]
-								}
+								},
+								"description": "### First step to change subscriber password\n\n{{API_URL}}/subscriber/forgot   \nperm:\n- Any: any   \nCode expires in 10 minutes"
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Forgot Password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"andres.muller44@ethereal.email\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/forgot",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"forgot"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "51"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"33-pCnXEKoeh0EIGFemKEynamz2wdI\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 01:32:45 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": \"lqeqcvja\",\n    \"id\": \"5d9dda57d8a3bb32b04f6518\"\n}"
+								},
+								{
+									"name": "Forgot Password/ Wrong EMAIL",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"andres.muller444@ethereal.email\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/forgot",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"forgot"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "33"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"21-A1ZCpQf1vOOgiZ/iACL+y/LCLPo\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 01:33:33 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"subscriber_not_found\"\n}"
+								}
+							]
 						},
 						{
 							"name": "Restore Password",
@@ -373,493 +183,530 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"phone\": \"+77052054400\",\n\t\"code\": \"itn2rvqh\",\n\t\"password\": \"12345\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n\t\"code\": \"m3qq8ptm\"\n}"
 								},
 								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscriber/restore",
+									"raw": "{{API_URL}}/subscriber/restore",
 									"host": [
-										"{{Local Host URL}}"
+										"{{API_URL}}"
 									],
 									"path": [
-										"subscription",
 										"subscriber",
 										"restore"
 									]
-								}
-							},
-							"response": []
-						}
-					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "2377a90a-b8d1-44b8-b661-f523052c0305",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "763350cc-3ab9-4192-82b0-690a6e93b72a",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Message",
-					"item": [
-						{
-							"name": "Get All Messages",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/message/get_messages",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"message",
-										"get_messages"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Message By ID",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/message/get_message/:message_id",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"message",
-										"get_message",
-										":message_id"
-									],
-									"variable": [
-										{
-											"key": "message_id",
-											"value": "5d7f05ea3305892a00782976"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create Message",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"text\": \"*some messagew* _hjkadshk_\\n\\n~ashjd~\",\n\t\"schedule_date\": \"2019-09-27T13:34:00\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
 								},
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/message/create_message",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"message",
-										"create_message"
-									]
-								}
+								"description": "### Second step to change subscriber password\n\n{{API_URL}}/subscriber/restore   \nperm:\n- Any: any   \nCode expires in 10 minutes"
 							},
-							"response": []
-						},
-						{
-							"name": "Update Message by ID",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"text\": \"some message wuth custom text\",\n\t\"schedule_date\": \"2019-09-27T13:06:00\"\n}"
-								},
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/message/update_message/:message_id",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"message",
-										"update_message",
-										":message_id"
-									],
-									"variable": [
-										{
-											"key": "message_id",
-											"value": "5d8dae0b56402036d422cf48"
+							"response": [
+								{
+									"name": "Restore Password/ Invalid CODE",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"code\": \"3xn561gy1\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/restore",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"restore"
+											]
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete Message by ID",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"login\": \"test12\"\n}"
-								},
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/message/delete_message/:message_id",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"message",
-										"delete_message",
-										":message_id"
-									],
-									"variable": [
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
 										{
-											"key": "message_id",
-											"value": "5d7f05123305892a00782975"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "2377a90a-b8d1-44b8-b661-f523052c0305",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "763350cc-3ab9-4192-82b0-690a6e93b72a",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Promo Code",
-					"item": [
-						{
-							"name": "Get Promo Codes",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/promo_code/get_promo_codes",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"promo_code",
-										"get_promo_codes"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Promo Code by ID",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/promo_code/get_promo_code/:promo_code",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"promo_code",
-										"get_promo_code",
-										":promo_code"
-									],
-									"variable": [
-										{
-											"key": "promo_code",
-											"value": "abc"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get discounted Price by Promo Code",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/promo_code/get_discount_price/:price/:promo_code",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"promo_code",
-										"get_discount_price",
-										":price",
-										":promo_code"
-									],
-									"variable": [
-										{
-											"key": "price",
-											"value": "10"
+											"key": "X-Powered-By",
+											"value": "Express"
 										},
 										{
-											"key": "promo_code",
-											"value": "abc"
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "25"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"19-Op0B+3vAsnV7meWBwMgZ665SmGc\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 01:49:44 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
 										}
-									]
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"invalid_code\"\n}"
+								},
+								{
+									"name": "Restore Password/ Code expired",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/restore",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"restore"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2b-x7myVgdFQd6JOfJqFh0RSOt1qMY\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 01:54:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"code_is_invalid_or_has_expired\"\n}"
+								},
+								{
+									"name": "Restore Password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/restore",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"restore"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "38"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"26-tyJVgKduseILcF2L4Q8Z4hEgz+s\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 01:49:24 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"reset_token\": \"q47hh33rg2jcm33x78ur\"\n}"
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "Create Promo Code",
+							"name": "Reset Password",
 							"request": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
 										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
+										"type": "text",
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"promo_code\": \"abc\",\n\t\"discount_rate\": \"20\",\n\t\"expires_date\": \"2019-09-26T05:48:00.992+00:00\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n\t\"reset_token\": \"j9ow5ci6g7yzglj7d2it\",\n\t\"password\": \"12345\"\n}"
 								},
 								"url": {
-									"raw": "{{Local Host URL}}/subscription/promo_code/create_promo_code",
+									"raw": "{{API_URL}}/subscriber/reset",
 									"host": [
-										"{{Local Host URL}}"
+										"{{API_URL}}"
 									],
 									"path": [
-										"subscription",
-										"promo_code",
-										"create_promo_code"
+										"subscriber",
+										"reset"
 									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update Promo Code",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"discount_rate\": \"50\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
 								},
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/promo_code/update_promo_code/:promo_code",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"promo_code",
-										"update_promo_code",
-										":promo_code"
-									],
-									"variable": [
-										{
-											"key": "promo_code",
-											"value": "abc"
-										}
-									]
-								}
+								"description": "### Therd step to change subscriber password\n\n{{API_URL}}/subscriber/reset   \nperm:\n- Any: any   \nCode expires in 10 minutes"
 							},
-							"response": []
-						},
-						{
-							"name": "Delete Promo Code",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/promo_code/delete_promo_code/:promo_code",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"promo_code",
-										"delete_promo_code",
-										":promo_code"
-									],
-									"variable": [
-										{
-											"key": "promo_code",
-											"value": "abc"
+							"response": [
+								{
+									"name": "Restore Password/ Code expired",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/restore",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"restore"
+											]
 										}
-									]
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2b-x7myVgdFQd6JOfJqFh0RSOt1qMY\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 01:54:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"code_is_invalid_or_has_expired\"\n}"
+								},
+								{
+									"name": "Restore Password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/restore",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"restore"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "38"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"26-tyJVgKduseILcF2L4Q8Z4hEgz+s\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 01:49:24 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"reset_token\": \"q47hh33rg2jcm33x78ur\"\n}"
+								},
+								{
+									"name": "Restore Password/ Invalid CODE",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"code\": \"3xn561gy1\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/restore",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"restore"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "25"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"19-Op0B+3vAsnV7meWBwMgZ665SmGc\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 01:49:44 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"invalid_code\"\n}"
+								},
+								{
+									"name": "Reset Password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"reset_token\": \"7dh0w2l758ueorw2zez4\",\n\t\"password\": \"12345\"\n}"
+										},
+										"url": {
+											"raw": "{{API_URL}}/subscriber/reset",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"subscriber",
+												"reset"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "38"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"26-uGzdYPgYfjJJsgtyuv+PLczRTCQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 10 Oct 2019 02:16:37 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"password_has_been_changed\"\n}"
 								}
-							},
-							"response": []
+							]
 						}
 					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "cbf3b05d-00d3-4fdc-9145-75731b3b9f52",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "ab6399ff-3f5b-49dd-9109-0e88fd678374",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
 				{
-					"name": "Subscription",
-					"item": [
-						{
-							"name": "Get Subscriptions",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscription/get_subscriptions",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscription",
-										"get_subscriptions"
-									]
-								}
-							},
-							"response": []
+					"name": "Sign up",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Eric\",\r\n    \"last_name\": \"Moen jgkTzeCmq7qPTwvRz6\",\r\n    \"email\": \"erich.moen@ethereal.email\",\r\n    \"phone\": \"+77755505497\",\r\n    \"password\": \"1234\"\r\n}"
 						},
-						{
-							"name": "Get Subscription by Id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscription/get_subscription/:subscription_id",
-									"host": [
-										"{{Local Host URL}}"
-									],
-									"path": [
-										"subscription",
-										"subscription",
-										"get_subscription",
-										":subscription_id"
-									],
-									"variable": [
-										{
-											"key": "subscription_id",
-											"value": "5d8c7a5438fd5f0c9afbea3e"
-										}
-									]
-								}
-							},
-							"response": []
+						"url": {
+							"raw": "{{API_URL}}/subscriber/sign_up",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"sign_up"
+							]
 						},
+						"description": "### Signup subscriber   \n\n{{API_URL}}/subscriber/signup   \nperm:\n- Subscriber: creates subscriber    \n\nRequest exapmle:\n```\n{\n    \"first_name\": \"Andres\",\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"phone\": \"+7755505497\",\n    \"password\": \"1234\"\n}\n\n{\n    \"first_name\": \"Eric\",\n    \"last_name\": \"Moen jgkTzeCmq7qPTwvRz6\",\n    \"email\": \"erich.moen@ethereal.email\",\n    \"phone\": \"+77755505497\",\n    \"password\": \"1234\"\n}\n```   \n\nCreates this model in MONGO  \n```\n{   \n\"_id\":\"5d9dda57d8a3bb32b04f6518\",   \n\"__v\":0,   \n\"createdAt\":\"2019-10-09T13:02:15.029Z\",   \n\"email\":\"andres.muller44@ethereal.email\",   \n\"first_name\":\"Andres\",   \n\"last_name\":\"Muller F9R5SFtYYfeXrwU2jN\",   \n\"password\":\"7f81ad6f2fb0074ca42a14364c652b104f27f69814408556c4ec4fcd9e1af1d9\",   \n\"phone\":\"+7755505497\",   \n\"salt\":\"c650f3ac959708d0750f53546b969193\",   \n\"subscriber\":false,   \n\"updatedAt\":\"2019-10-09T13:02:15.029Z\"}   \n```"
+					},
+					"response": [
 						{
-							"name": "Create Subscription",
-							"request": {
+							"name": "Sign up(Create Subscriber) ",
+							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
@@ -871,31 +718,59 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"title\": \"abc\",\n\t\"prices\": {\n\t\t\"amount\": 100,\n\t\t\"currency\": \"KZT\",\n\t\t\"discount_amount\": 100\n\t},\n\t\"expires_date\": \"2019-09-26T05:48:00.992+00:00\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n    \"first_name\": \"Eric\",\n    \"last_name\": \"Moen jgkTzeCmq7qPTwvRz6\",\n    \"email\": \"erich.moen@ethereal.email\",\n    \"phone\": \"+77755505497\",\n    \"password\": \"1234\"\n}"
 								},
 								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscription/create_subscription",
+									"raw": "{{API_URL}}/subscriber/sign_up",
 									"host": [
-										"{{Local Host URL}}"
+										"{{API_URL}}"
 									],
 									"path": [
-										"subscription",
-										"subscription",
-										"create_subscription"
+										"subscriber",
+										"sign_up"
 									]
 								}
 							},
-							"response": []
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e-44prQM7ryBY1DE//+G1PyguOuyo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 12:29:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"subscriber_was_updated\",\n    \"subscriber_id\": \"5d9b270e4d86a5285e77ed15\"\n}"
 						},
 						{
-							"name": "Update Subscription",
-							"request": {
-								"method": "PUT",
+							"name": "Sign up(Create Subscriber)/ User with this PHONE already exists",
+							"originalRequest": {
+								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
@@ -906,92 +781,1133 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"discount_rate\": \"50\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\r\n    \"first_name\": \"Andres\",\r\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\r\n    \"email\": \"andres.muller44@ethereal.email\",\r\n    \"phone\": \"+7755505497\",\r\n    \"password\": \"1234\"\r\n}\r\n"
 								},
 								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscription/update_subscription/:subscription_id",
+									"raw": "{{API_URL}}/subscriber/sign_up",
 									"host": [
-										"{{Local Host URL}}"
+										"{{API_URL}}"
 									],
 									"path": [
-										"subscription",
-										"subscription",
-										"update_subscription",
-										":subscription_id"
-									],
-									"variable": [
-										{
-											"key": "subscription_id",
-											"value": ""
-										}
+										"subscriber",
+										"sign_up"
 									]
 								}
 							},
-							"response": []
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-LUBijDWliY6Y1AYIkcQ83o4Q7gU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 13:00:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"key_already_exists\",\n    \"fields\": \"phone\"\n}"
 						},
 						{
-							"name": "Delete Subscription",
-							"request": {
-								"method": "DELETE",
-								"header": [],
+							"name": "Sign up(Create Subscriber)/User with this EMAIL already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Andres\",\r\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\r\n    \"email\": \"andres.muller44@ethereal.email\",\r\n    \"phone\": \"+7755505497\",\r\n    \"password\": \"1234\"\r\n}\r\n"
+								},
 								"url": {
-									"raw": "{{Local Host URL}}/subscription/subscription/delete_subscription/:subscription_id",
+									"raw": "{{API_URL}}/subscriber/sign_up",
 									"host": [
-										"{{Local Host URL}}"
+										"{{API_URL}}"
 									],
 									"path": [
-										"subscription",
-										"subscription",
-										"delete_subscription",
-										":subscription_id"
-									],
-									"variable": [
-										{
-											"key": "subscription_id",
-											"value": "5d8c7a5438fd5f0c9afbea3e"
-										}
+										"subscriber",
+										"sign_up"
 									]
 								}
 							},
-							"response": []
-						}
-					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "cbf3b05d-00d3-4fdc-9145-75731b3b9f52",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-rmmLJZF2mxMpEzegp0Cj+giwXLw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 12:58:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"key_already_exists\",\n    \"fields\": \"email\"\n}"
 						},
+						{
+							"name": "Sign up(Create Subscriber)/User password not provided",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Andres\",\r\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\r\n    \"email\": \"andres.muller44@ethereal.email\",\r\n    \"phone\": \"+7755505497\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/sign_up",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"sign_up"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-yxOQegBLBEU/q5Lnu2dls69vTiM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 12:41:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"password_not_provided\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign in(Enter to the System)",
+					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "ab6399ff-3f5b-49dd-9109-0e88fd678374",
-								"type": "text/javascript",
+								"id": "e16288be-537d-4aa5-8917-333ab923d6d8",
 								"exec": [
-									""
-								]
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.environment.set(\"token\", pm.response.json().token);",
+									"});"
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber/sign_in",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"sign_in"
+							]
+						},
+						"description": "### Signin subscriber/admin\n\n{{API_URL}}/subscriber/signin   \nperm:\n- Admin: enters wp system\n- Subscriber: enters wp system \n\nRequest exapmle:\n```\n{\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"password\": \"12345\"\n}\n{\n\t\"email\": \"erich.moen@ethereal.email\",\n    \"password\": \"12345\"\n}\n\n```   \n\nReturns jwt token"
+					},
+					"response": [
+						{
+							"name": "Sign in(Enter to the System)/ Invalid password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"password\": \"12341\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/sign_in",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"sign_in"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-wYB1nsuvukJsyEfej617hlFAxvM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 13:14:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"invalid_login_or_password\"\n}"
+						},
+						{
+							"name": "Sign in(Enter to the System)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"password\": \"1234\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/sign_in",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"sign_in"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "289"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"121-Xt7gO1mqNed+cTDdF8M33zZlp44\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 13:14:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDlkZGE1N2Q4YTNiYjMyYjA0ZjY1MTgiLCJlbWFpbCI6ImFuZHJlcy5tdWxsZXI0NEBldGhlcmVhbC5lbWFpbCIsImlhdCI6MTU3MDYyNjg1NiwiZXhwIjoxNTcwNjMwNDU2LCJpc3MiOiJhZG1pbiJ9.duJre1Ze5vcMVR7qU-9ssVOgeZK_tIcPuhLLRcIEw8w\",\n    \"id\": \"5d9dda57d8a3bb32b04f6518\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"old_password\": \"123466\",\n\t\"new_password\": \"1234567\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber/change",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"change"
+							]
+						},
+						"description": "### Change subscriber/admin password\n\n{{API_URL}}/subscriber/change   \nperm:\n- Admin: self \n- Subscriber: self"
+					},
+					"response": [
+						{
+							"name": "Change Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"old_password\": \"1234\",\n\t\"new_password\": \"1234567\"\n\t\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/change",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"change"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-uGzdYPgYfjJJsgtyuv+PLczRTCQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 07:40:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"password_has_been_changed\"\n}"
+						},
+						{
+							"name": "Change Password/ Incorrect password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"old_password\": \"123466\",\n\t\"new_password\": \"1234567\"\n\t\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/change",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"change"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-7xV+RuzxUOFi6Y3OQO+xl8/TpgY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 07:41:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"passwords_not_match\"\n}"
+						},
+						{
+							"name": "Change Password/ Incorrect password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"old_password\": \"123466\",\n\t\"new_password\": \"1234567\"\n\t\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/change",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"change"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-7xV+RuzxUOFi6Y3OQO+xl8/TpgY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 07:41:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"passwords_not_match\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Subscriber by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber/5da026673ba4ce4148b46755",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"5da026673ba4ce4148b46755"
+							]
+						},
+						"description": "### Delete subscriber\n\n{{API_URL}}/subscriber/--id--   \nperm:\n- Admin: anyone \n- Subscriber: not_permoted"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber"
+							]
+						},
+						"description": "### Get all subscriber/admin\n\n{{API_URL}}/subscriber\nperm:\n- Admin: all \n- Subscriber: not_permited"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber?subscriber_id=5d9ee472546f5610d08c2a79",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber"
+							],
+							"query": [
+								{
+									"key": "subscriber_id",
+									"value": "5d9ee472546f5610d08c2a79"
+								}
+							]
+						},
+						"description": "{{API_URL}}/subscriber/--subscriberid--   \nperm:\n- Admin: gets anyone\n- Subscriber: returns himself even --subscriberid-- provided"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subscriber by ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Andres\",\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\n    \n    \"phone\": \"77755505497\",\n    \"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber/5da66cda497b3616653d45c2",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"5da66cda497b3616653d45c2"
+							]
+						},
+						"description": "### Update subscriber   \n\n\n{{API_URL}}/subscriber\nperm:\n- Admin: anyone \n- Subscriber: self\n\nRequest exapmle:\n```\n{\n    \"first_name\": \"Andres\",\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"phone\": \"+7755505497\",\n    \"password\": \"1234\"\n}\n\n{\n    \"first_name\": \"Eric\",\n    \"last_name\": \"Moen jgkTzeCmq7qPTwvRz6\",\n    \"email\": \"erich.moen@ethereal.email\",\n    \"phone\": \"+77755505497\",\n    \"password\": \"1234\"\n}\n```   \n\nCreates this model in MONGO  \n```\n{   \n\"_id\":\"5d9dda57d8a3bb32b04f6518\",   \n\"__v\":0,   \n\"createdAt\":\"2019-10-09T13:02:15.029Z\",   \n\"email\":\"andres.muller44@ethereal.email\",   \n\"first_name\":\"Andres\",   \n\"last_name\":\"Muller F9R5SFtYYfeXrwU2jN\",   \n\"password\":\"7f81ad6f2fb0074ca42a14364c652b104f27f69814408556c4ec4fcd9e1af1d9\",   \n\"phone\":\"+7755505497\",   \n\"salt\":\"c650f3ac959708d0750f53546b969193\",   \n\"subscriber\":false,   \n\"updatedAt\":\"2019-10-09T13:02:15.029Z\"}   \n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber Subscription  by Subscriber ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber/subscription?subscriber_id=5d9ee472546f5610d08c2a79",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"subscription"
+							],
+							"query": [
+								{
+									"key": "subscriber_id",
+									"value": "5d9ee472546f5610d08c2a79"
+								}
+							]
+						},
+						"description": "### Update subscriber   \n\n\nRequest exapmle:\n```\n{\n    \"first_name\": \"Andres\",\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"phone\": \"+7755505497\",\n    \"password\": \"1234\"\n}\n\n{\n    \"first_name\": \"Eric\",\n    \"last_name\": \"Moen jgkTzeCmq7qPTwvRz6\",\n    \"email\": \"erich.moen@ethereal.email\",\n    \"phone\": \"+77755505497\",\n    \"password\": \"1234\"\n}\n```   \n\nCreates this model in MONGO  \n```\n{   \n\"_id\":\"5d9dda57d8a3bb32b04f6518\",   \n\"__v\":0,   \n\"createdAt\":\"2019-10-09T13:02:15.029Z\",   \n\"email\":\"andres.muller44@ethereal.email\",   \n\"first_name\":\"Andres\",   \n\"last_name\":\"Muller F9R5SFtYYfeXrwU2jN\",   \n\"password\":\"7f81ad6f2fb0074ca42a14364c652b104f27f69814408556c4ec4fcd9e1af1d9\",   \n\"phone\":\"+7755505497\",   \n\"salt\":\"c650f3ac959708d0750f53546b969193\",   \n\"subscriber\":false,   \n\"updatedAt\":\"2019-10-09T13:02:15.029Z\"}   \n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Subscriber",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Andres\",\r\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\r\n    \"email\": \"andres.muller44@ethereal.email\",\r\n    \"phone\": \"+7755505497\",\r\n    \"password\": \"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber/create",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"create"
+							]
+						},
+						"description": "### Create subscriber   \n\n\nRequest exapmle:\n```\n{\n    \"first_name\": \"Andres\",\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"phone\": \"+7755505497\",\n    \"password\": \"1234\"\n}\n\n{\n    \"first_name\": \"Eric\",\n    \"last_name\": \"Moen jgkTzeCmq7qPTwvRz6\",\n    \"email\": \"erich.moen@ethereal.email\",\n    \"phone\": \"+77755505497\",\n    \"password\": \"1234\"\n}\n```   \n\nCreates this model in MONGO  \n```\n{   \n\"_id\":\"5d9dda57d8a3bb32b04f6518\",   \n\"__v\":0,   \n\"createdAt\":\"2019-10-09T13:02:15.029Z\",   \n\"email\":\"andres.muller44@ethereal.email\",   \n\"first_name\":\"Andres\",   \n\"last_name\":\"Muller F9R5SFtYYfeXrwU2jN\",   \n\"password\":\"7f81ad6f2fb0074ca42a14364c652b104f27f69814408556c4ec4fcd9e1af1d9\",   \n\"phone\":\"+7755505497\",   \n\"salt\":\"c650f3ac959708d0750f53546b969193\",   \n\"subscriber\":false,   \n\"updatedAt\":\"2019-10-09T13:02:15.029Z\"}   \n```"
+					},
+					"response": [
+						{
+							"name": "Sign up(Create Subscriber) ",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"Eric\",\n    \"last_name\": \"Moen jgkTzeCmq7qPTwvRz6\",\n    \"email\": \"erich.moen@ethereal.email\",\n    \"phone\": \"+77755505497\",\n    \"password\": \"1234\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/sign_up",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"sign_up"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e-44prQM7ryBY1DE//+G1PyguOuyo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 12:29:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"subscriber_was_updated\",\n    \"subscriber_id\": \"5d9b270e4d86a5285e77ed15\"\n}"
+						},
+						{
+							"name": "Sign up(Create Subscriber)/User with this EMAIL already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Andres\",\r\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\r\n    \"email\": \"andres.muller44@ethereal.email\",\r\n    \"phone\": \"+7755505497\",\r\n    \"password\": \"1234\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/sign_up",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"sign_up"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-rmmLJZF2mxMpEzegp0Cj+giwXLw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 12:58:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"key_already_exists\",\n    \"fields\": \"email\"\n}"
+						},
+						{
+							"name": "Sign up(Create Subscriber)/ User with this PHONE already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Andres\",\r\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\r\n    \"email\": \"andres.muller44@ethereal.email\",\r\n    \"phone\": \"+7755505497\",\r\n    \"password\": \"1234\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/sign_up",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"sign_up"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-LUBijDWliY6Y1AYIkcQ83o4Q7gU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 13:00:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"key_already_exists\",\n    \"fields\": \"phone\"\n}"
+						},
+						{
+							"name": "Sign up(Create Subscriber)/User password not provided",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Andres\",\r\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\r\n    \"email\": \"andres.muller44@ethereal.email\",\r\n    \"phone\": \"+7755505497\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/sign_up",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"sign_up"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-yxOQegBLBEU/q5Lnu2dls69vTiM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Oct 2019 12:41:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"password_not_provided\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Call back for PAYBOX Extend Subscriber Subscription  by Subscriber ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"promocode\": \"+77052054401\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber/subscription",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"subscription"
+							]
+						},
+						"description": "### Extends   \n\n{{API_URL}}/subscriber/subscription/--id--\nperm:\n- Admin: Admin extends from another url \n- Subscriber: self\n\nRequest exapmle:\n```\n{\n    \"first_name\": \"Andres\",\n    \"last_name\": \"Muller F9R5SFtYYfeXrwU2jN\",\n    \"email\": \"andres.muller44@ethereal.email\",\n    \"phone\": \"+7755505497\",\n    \"password\": \"1234\"\n}\n\n{\n    \"first_name\": \"Eric\",\n    \"last_name\": \"Moen jgkTzeCmq7qPTwvRz6\",\n    \"email\": \"erich.moen@ethereal.email\",\n    \"phone\": \"+77755505497\",\n    \"password\": \"1234\"\n}\n```   \n\nCreates this model in MONGO  \n```\n{   \n\"_id\":\"5d9dda57d8a3bb32b04f6518\",   \n\"__v\":0,   \n\"createdAt\":\"2019-10-09T13:02:15.029Z\",   \n\"email\":\"andres.muller44@ethereal.email\",   \n\"first_name\":\"Andres\",   \n\"last_name\":\"Muller F9R5SFtYYfeXrwU2jN\",   \n\"password\":\"7f81ad6f2fb0074ca42a14364c652b104f27f69814408556c4ec4fcd9e1af1d9\",   \n\"phone\":\"+7755505497\",   \n\"salt\":\"c650f3ac959708d0750f53546b969193\",   \n\"subscriber\":false,   \n\"updatedAt\":\"2019-10-09T13:02:15.029Z\"}   \n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Compute Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"promocode\": \"+77052054401\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscriber/subscription",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscriber",
+								"subscription"
+							]
+						},
+						"description": "### Extends   \n\n{{API_URL}}/subscriber/payment\nperm:\n- Admin: useles \n- Subscriber: self\n\nRequest exapmle:\n```\n{\n    \"promocode\": \"1234\"\n}"
+					},
+					"response": []
 				}
 			],
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "4f896e9a-bfac-43f7-a23f-55b9554b24ca",
+						"id": "2377a90a-b8d1-44b8-b661-f523052c0305",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1001,7 +1917,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "708a2094-65c6-4539-83a8-dfb9311ec5e6",
+						"id": "763350cc-3ab9-4192-82b0-690a6e93b72a",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1009,6 +1925,1733 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Promocode",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"code\": \"+770520544w01\",\n\t\"exp\": \"2019-10-10T07:49:30.539Z\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/promocode",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"promocode"
+							]
+						},
+						"description": "### Create promocode   \n\n\n{{API_URL}}/promocode   \nperm:\n- Admin: any \n- Subscriber: not_permited"
+					},
+					"response": [
+						{
+							"name": "Reset Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"reset_token\": \"7dh0w2l758ueorw2zez4\",\n\t\"password\": \"12345\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/reset",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"reset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-uGzdYPgYfjJJsgtyuv+PLczRTCQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 02:16:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"password_has_been_changed\"\n}"
+						},
+						{
+							"name": "Restore Password/ Invalid CODE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy1\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-Op0B+3vAsnV7meWBwMgZ665SmGc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"invalid_code\"\n}"
+						},
+						{
+							"name": "Restore Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-tyJVgKduseILcF2L4Q8Z4hEgz+s\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"reset_token\": \"q47hh33rg2jcm33x78ur\"\n}"
+						},
+						{
+							"name": "Restore Password/ Code expired",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-x7myVgdFQd6JOfJqFh0RSOt1qMY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:54:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"code_is_invalid_or_has_expired\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/promocode/5d9f18b8d716b6181075c60e",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"promocode",
+								"5d9f18b8d716b6181075c60e"
+							]
+						},
+						"description": "### Delete promocode   \n\n\n{{API_URL}}/promocode/--id--   \nperm:\n- Admin: any \n- Subscriber: not_permited"
+					},
+					"response": [
+						{
+							"name": "Restore Password/ Code expired",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-x7myVgdFQd6JOfJqFh0RSOt1qMY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:54:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"code_is_invalid_or_has_expired\"\n}"
+						},
+						{
+							"name": "Reset Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"reset_token\": \"7dh0w2l758ueorw2zez4\",\n\t\"password\": \"12345\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/reset",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"reset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-uGzdYPgYfjJJsgtyuv+PLczRTCQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 02:16:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"password_has_been_changed\"\n}"
+						},
+						{
+							"name": "Restore Password/ Invalid CODE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy1\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-Op0B+3vAsnV7meWBwMgZ665SmGc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"invalid_code\"\n}"
+						},
+						{
+							"name": "Restore Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-tyJVgKduseILcF2L4Q8Z4hEgz+s\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"reset_token\": \"q47hh33rg2jcm33x78ur\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/promocode/5da01fe1a369133cb09e54bf",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"promocode",
+								"5da01fe1a369133cb09e54bf"
+							]
+						},
+						"description": "### Get promocode   \n\n\n{{API_URL}}/promocode   \nperm:\n- Admin: any \n- Subscriber: any"
+					},
+					"response": [
+						{
+							"name": "Restore Password/ Code expired",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-x7myVgdFQd6JOfJqFh0RSOt1qMY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:54:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"code_is_invalid_or_has_expired\"\n}"
+						},
+						{
+							"name": "Restore Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-tyJVgKduseILcF2L4Q8Z4hEgz+s\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"reset_token\": \"q47hh33rg2jcm33x78ur\"\n}"
+						},
+						{
+							"name": "Reset Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"reset_token\": \"7dh0w2l758ueorw2zez4\",\n\t\"password\": \"12345\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/reset",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"reset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-uGzdYPgYfjJJsgtyuv+PLczRTCQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 02:16:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"password_has_been_changed\"\n}"
+						},
+						{
+							"name": "Restore Password/ Invalid CODE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy1\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-Op0B+3vAsnV7meWBwMgZ665SmGc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"invalid_code\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"discount\": 10,\n\t\"code\": \"test\",\n\t\"exp\": \"2019-10-10T07:49:30.539Z\",\n\t\"total\": 300\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/promocode/5da671c4efd47e1abc212038",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"promocode",
+								"5da671c4efd47e1abc212038"
+							]
+						},
+						"description": "### Update promocode   \n\n\n{{API_URL}}/promocode/--id--   \nperm:\n- Admin: any \n- Subscriber: not_permited"
+					},
+					"response": [
+						{
+							"name": "Reset Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"reset_token\": \"7dh0w2l758ueorw2zez4\",\n\t\"password\": \"12345\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/reset",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"reset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-uGzdYPgYfjJJsgtyuv+PLczRTCQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 02:16:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"password_has_been_changed\"\n}"
+						},
+						{
+							"name": "Restore Password/ Code expired",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-x7myVgdFQd6JOfJqFh0RSOt1qMY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:54:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"code_is_invalid_or_has_expired\"\n}"
+						},
+						{
+							"name": "Restore Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-tyJVgKduseILcF2L4Q8Z4hEgz+s\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"reset_token\": \"q47hh33rg2jcm33x78ur\"\n}"
+						},
+						{
+							"name": "Restore Password/ Invalid CODE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy1\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-Op0B+3vAsnV7meWBwMgZ665SmGc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"invalid_code\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/promocode",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"promocode"
+							]
+						},
+						"description": "### Get all promocodes   \n\n\n{{API_URL}}/promocode/--id--   \nperm:\n- Admin: any \n- Subscriber: any"
+					},
+					"response": [
+						{
+							"name": "Restore Password/ Code expired",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-x7myVgdFQd6JOfJqFh0RSOt1qMY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:54:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"code_is_invalid_or_has_expired\"\n}"
+						},
+						{
+							"name": "Restore Password/ Invalid CODE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy1\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-Op0B+3vAsnV7meWBwMgZ665SmGc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"invalid_code\"\n}"
+						},
+						{
+							"name": "Reset Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"reset_token\": \"7dh0w2l758ueorw2zez4\",\n\t\"password\": \"12345\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/reset",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"reset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-uGzdYPgYfjJJsgtyuv+PLczRTCQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 02:16:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"password_has_been_changed\"\n}"
+						},
+						{
+							"name": "Restore Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"code\": \"3xn561gy\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/subscriber/restore",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"subscriber",
+										"restore"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-tyJVgKduseILcF2L4Q8Z4hEgz+s\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Oct 2019 01:49:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"reset_token\": \"q47hh33rg2jcm33x78ur\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "Create/Update settings",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n   \"email\": {\r\n   \t\t\"host\": \"smtp.gmail.com\",\r\n\t    \"auth\": {\r\n\t        \"user\": \"anuar.ibraev97@gmail.com\",\r\n\t        \"pass\": \"970513351609_Anuar$\"\r\n\t    },\r\n\t    \"port\": 465\r\n   },\r\n   \"wp\": {\r\n   \t\t\"api_url\": \"https://eu35.chat-api.com/instance73671/\",\r\n\t   \t\"token\":\"q915vgzv1yh0gctz\"\r\n   },\r\n   \"ps\": {\r\n   \t\t\"pg_merchant_id\": \"520369\",\r\n   \t\t\"secret_key\": \"SU4vL4w6xTK7UKoU\"\r\n   }\r\n }"
+						},
+						"url": {
+							"raw": "{{API_URL}}/settings",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"settings"
+							]
+						},
+						"description": "### Create/Update settings   \n\n{{API_URL}}/settings\nperm:\n- Admin: any \n- Subscriber: not_permited    \n\nRequest exapmle:\n```\n {\n   \"email\": {\n   \t \"host\": \"smtp.gmail.com\",\n    \"auth\": {\n        \"user\": \"ktoizhan@gmail.com\",\n        \"pass\": \"Ywnwa!(8213061994aabcE\"\n    },\n    \"port\": 465\n   },\n   \"wp\": {\n   \t\"api_url\": \"https\",\n   \t\"token\":\"q\"\n   }\n  }\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/settings",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"settings"
+							]
+						},
+						"description": "### Get settings   \n\n{{API_URL}}/settings\nperm:\n- Admin: any \n- Subscriber: not_permited"
+					},
+					"response": []
+				}
+			],
+			"description": "Whatsapp and Email settings"
+		},
+		{
+			"name": "Subscription",
+			"item": [
+				{
+					"name": "Create/Update subscription",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n   \"is_active\": true,\r\n    \"title\": \"Moon\",\r\n   \"prices\": {\r\n   \t\"amount\": \"999\",\r\n   \t\"currency\":\"KZT\"\r\n   }\r\n  }"
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscription",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscription"
+							]
+						},
+						"description": "### Create/Update subscription   \n\n{{API_URL}}/subscription\nperm:\n- Admin: any \n- Subscriber: not_permited    \n\nRequest exapmle:\n```\n {\n   \"is_active\": true,\n    \"title\": \"Moon\",\n   \"prices\": {\n   \t\"amount\": \"100\",\n   \t\"currency\":\"KZT\"\n   }\n  }\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get subscription",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/subscription",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"subscription"
+							]
+						},
+						"description": "### Get subscription   \n\n{{API_URL}}/subscription\nperm:\n- Any: any"
+					},
+					"response": []
+				}
+			],
+			"description": "Whatsapp and Email settings"
+		},
+		{
+			"name": "Whatsapp",
+			"item": [
+				{
+					"name": "Create message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "Hello World",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/msg",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"msg"
+							]
+						},
+						"description": "### Create message   \n\n{{API_URL}}/msg\nperm:\n- Admin: any \n- Subscriber: not_permited"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete message",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_URL}}/msg",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"msg"
+							]
+						},
+						"description": "### Delete message   \n\n{{API_URL}}/msg/--id--\nperm:\n- Admin: any \n- Subscriber: not_permited"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n   \"email\": {\r\n   \t \"host\": \"smtp.gmail.com\",\r\n    \"auth\": {\r\n        \"user\": \"ktoizhan@gmail.com\",\r\n        \"pass\": \"Ywnwa!(8213061994aabcE\"\r\n    },\r\n    \"port\": 465\r\n   },\r\n   \"wp\": {\r\n   \t\"api_url\": \"https\",\r\n   \t\"token\":\"q\"\r\n   }\r\n  }"
+						},
+						"url": {
+							"raw": "{{API_URL}}/msg",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"msg"
+							]
+						},
+						"description": "### Get messages   \n\n{{API_URL}}/msg\nperm:\n- Admin: any \n- Subscriber: not_permited"
+					},
+					"response": []
+				}
+			],
+			"description": "Whatsapp and Email settings"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b59da537-e26c-416a-9097-e6d44b2261f2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "bdc8db8e-7e58-45a4-951f-1c20d933e304",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

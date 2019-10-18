@@ -9,6 +9,7 @@ const passwordManager = require(`@tella-utills/gen_password.js`);
 const jwtManager = require(`@tella-utills/jwt.js`);
 const check = require(`@tella-utills/check.js`);
 const sendMail = require(`@tella-utills/email_notify.js`);
+const settingsController = require('@tella-controllers/settings.js');
 const addMonthToDate = (date, month) => new Date(date.setMonth(date.getMonth() + month));
 
 module.exports.signup = async (req, res) => {
@@ -74,7 +75,7 @@ module.exports.signin = async (req, res) => {
     res.status(400).send({ error: 'payload_is_empty' });
   } else {
     let subscriber = await userModel.findOne({ email: req.body.email }, '_id email password salt');
-    console.log(JSON.stringify(subscriber));
+    // console.log(JSON.stringify(subscriber));
     if (check.isObjectEmpty(subscriber)) {
       res.status(400).send({ error: 'invalid_email_or_password' });
     } else {
@@ -84,7 +85,7 @@ module.exports.signin = async (req, res) => {
 
         if (computedPassword === subscriberPassword) {
           const subscriberJwt = jwtManager.createJWT({ _id: subscriber._id, email: subscriber.email });
-          console.log(`TOKE1=${ JSON.stringify( subscriberJwt ) }`);
+          // console.log(`TOKE1=${ JSON.stringify( subscriberJwt ) }`);
           await userModel.findByIdAndUpdate(subscriber._id, { token: subscriberJwt } );
           let updated_sub = await userModel.findOne({ _id: subscriber._id }).select('-password -salt -token');
           res.status(200).send({user: updated_sub, token:subscriberJwt});
@@ -218,9 +219,10 @@ module.exports.changePassword = async (req, res) => {
           return 0;
         } else {
           const newPasswordData = passwordManager.genHashPassword(subscriberData.new_password);
-          await userModel.findByIdAndUpdate(subscriber._id, { password: newPasswordData.password, salt: newPasswordData.salt } );
+          let token = jwtManager.createJWT({ _id: subscriber._id, email: subscriber.email });
+          await userModel.findByIdAndUpdate(subscriber._id, { password: newPasswordData.password, salt: newPasswordData.salt, token:token } );
           sendMail.sendRestoreMessage(subscriber.email);
-          res.status(200).send({ message: 'password_has_been_changed' });
+          res.status(200).send({ message: 'password_has_been_changed', token:token });
         }
       } catch (err) {
         res.status(400).send({ error: err.message });
@@ -229,7 +231,7 @@ module.exports.changePassword = async (req, res) => {
   }
 };
 
-module.exports.deleteSubscriberById = async (req, res) => {
+module.exports.delete = async (req, res) => {
   const subscriber_id = req.params.id;
   
 
@@ -249,7 +251,7 @@ module.exports.deleteSubscriberById = async (req, res) => {
   }
 };
 
-module.exports.selectAllSubscribers = async (req, res) => {
+module.exports.getAll = async (req, res) => {
   try {
     let subscribers = await userModel.find({}, '-__v');
     check.isArrayEmpty(subscribers) ? res.status(404).send({ error: 'subscribers_not_found' }) : res.status(200).send(subscribers);
@@ -258,7 +260,7 @@ module.exports.selectAllSubscribers = async (req, res) => {
   }
 };
 
-module.exports.selectSubscriberById = async (req, res) => {
+module.exports.get = async (req, res) => {
   const subscriberId = req.user_id;
   
   try {
@@ -273,12 +275,14 @@ module.exports.selectSubscriberById = async (req, res) => {
   }
 };
 
-module.exports.updateSubscriberById = async (req, res) => {
+module.exports.update = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
     res.status(400).send({ error: 'payload_is_empty' });
   } else {
     const subscriberId = req.user_id;
     const subscriberData = req.body;
+
+    console.log(JSON.stringify(subscriberData));
 
     if (subscriberData.password === undefined) {
       res.status(400).send({ error: 'password_not_provided' });
@@ -289,16 +293,15 @@ module.exports.updateSubscriberById = async (req, res) => {
     subscriberData.password = password.password;
     subscriberData.salt = password.salt;
 
-    subscriberData.is_subscribed = false;
 
     const data = {
-      $unset: subscriberData
+      $set: subscriberData
     };
 
     const options = {
       upsert: false,
       new: true,
-      runValidators: false
+      runValidators: true
     };
 
     try {
@@ -307,9 +310,10 @@ module.exports.updateSubscriberById = async (req, res) => {
       if (check.isObjectEmpty(updatedSubscriber)) {
         res.status(404).send({ status: 'subscriber_not_found' });
       } else {
+        // res.status(200).send({user: updated_sub, token:subscriberJwt});
         res.status(200).send({
           status: 'subscriber_was_updated',
-          subscriber_id: updatedSubscriber._id
+          user: updatedSubscriber
         });
       }
     } catch (err) {
@@ -326,7 +330,7 @@ module.exports.updateSubscriberById = async (req, res) => {
   }
 };
 
-module.exports.createSubscriber = async (req, res) => {
+module.exports.create = async (req, res) => {
   if (check.isObjectEmpty(req.body)) {
     res.status(400).send({ error: 'payload_is_empty' });
   } else {
@@ -385,58 +389,18 @@ module.exports.getSubscriptionById = async (req, res) => {
   }
 };
 
-module.exports.extendSubscription = async (req, res) => {
-  const subscriberId = req.user_id;
-  const code = req.body.promocode;
-
-  if (!code){
-    const promocode = await promocodeModel.findOne({ code: code });
-
-    if (!promocode){
-      res.status(400).send({error:'promocode_not_provided'});
-      return;
-    }
-    
-    if (promocode.expires_date > Date.now() ){
-      res.status(400).send({error:'promocode_not_valid'});
-      return;
-    }
-  }
-
-
-
-  const currentDateString = Date();
-
-  const currentDate = new Date(currentDateString);
-  const newDate = addMonthToDate(new Date(currentDateString), 1);
-
-  const data = {
-      subscriber: true,
-      subscription_starts: currentDate,
-      subscription_ends: newDate
-  };
-
-  const options = {
-    upsert: false,
-    new: true,
-    runValidators: true
-  };
-
-  let updatedSubscriber = await userModel.findOneAndUpdate({ _id: subscriberId }, data, options);
-  res.status(200).send({
-    message: 'subscription_extended'
-  });
-};
 
 module.exports.computePayment = async (req, res) => {
   const subscriberId = req.user_id;
   const code = req.body.promocode;
-  const discount = 0;
-  
-  console.log(`S=${code}`);
-  if (!code){
-    const promocode = await promocodeModel.findOne({ code: code });
+  let discount = 0;
 
+  let settings = await settingsController.getPsSettings();
+  
+  if (code){
+    let promocode = await promocodeModel.findOne({ code: code });
+    // console.log(`S=${promocode}`);
+    
     if (!promocode){
       res.status(400).send({error:'promocode_not_provided'});
       return;
@@ -448,7 +412,7 @@ module.exports.computePayment = async (req, res) => {
     }
     discount = (promocode.discount) ? promocode.discount : discount;
   }
-
+  
   let subscr = null;
   try{
     let query = await subscriptionModel.find().limit(1);
@@ -458,15 +422,22 @@ module.exports.computePayment = async (req, res) => {
     return;
   }
 
+  discount = 33;
+  console.log( (discount>0) );
+  let cost =  (discount>0) ?  Math.round(subscr.prices.amount*(1-(discount/100))) : subscr.prices.amount;
+
+
   let salt = passwordManager.salt(32);
   let payment_request = [
-    { pg_merchant_id: 520369 },
-    { pg_amount: 120 },
+    { pg_merchant_id: settings.pg_merchant_id },
+    { pg_amount: cost },
     { pg_currency: 'KZT'},
     { pg_description: 'Moon Service' },
     { pg_salt: salt },
     { pg_language: 'ru' },
-    { secret_key: 'SU4vL4w6xTK7UKoU' }
+    { tl_subscriber_id: subscriberId },
+    { tl_subscribtion_id: subscr.id },
+    { pg_result_url: 'http://81.255.198.100/api/paybox/result' }
         ]
   
         let keys = []
@@ -477,21 +448,57 @@ module.exports.computePayment = async (req, res) => {
           sorted.push(...a);
         });
 
-    console.log( sorted );
 
-  let cost = (discount>0) ? subscr.prices.amount*(discount/100) : subscr.prices.amount;
+  let payload = {};
+      sorted.map( a => {
+        for(let k in a ){
+          payload[k] = a[k];
+        }
+      });
+
+    // console.log( typeof payload, payload );
+
+
+
+    // console.log( payload );
+
+    payload = { 0:'payment.php', ...payload, s: settings.secret_key }
+
+    // console.log( payload );
+
+    let unsigned_str = '';
+    for(let k in payload){
+      unsigned_str += payload[k] + ';';
+    }
+
+    unsigned_str = unsigned_str.slice(0,-1);
+
+    // console.log( unsigned_str );
+
+    let signed_str = passwordManager.sign( unsigned_str );
+
+
+
+    delete payload['0'];
+    delete payload['s'];
+
+    payload = { ...payload, pg_sig:signed_str };
+
+    // console.log( payload );
+
+    let params = '';
+    for( let k in payload ){
+      params += `${ k }=${ payload[ k ] }&`
+    }
+
+    params = params.slice(0, -1);
+
   res.status(200).send({
     message: 'payment_ready',
-    cost:cost,
-    url: `https://api.paybox.money/payment.php`
-          +`?pg_merchant_id=${ '520369' }`
-          +`&pg_amount=${ 120 }`
-          +`&pg_currency=${ 'KZT' }`
-          +`&pg_description=${ 'Moon' }`
-          +`&pg_salt=${ 'AcxoGvfVCNraR8KL' }`
-          +`&pg_language=ru`
-          +`&pg_sig=${ 'd6434f57a0d87bea40c2d7ede4bae6be' }`
+    price: cost,
+    url: `https://api.paybox.money/payment.php?${ params }`
   });
+  
 }
 // Test
 module.exports.auth = async (req, res) => {
@@ -506,5 +513,75 @@ try{
 
 };
 
+module.exports.testPayment = async (req, res) => {
+  let salt = passwordManager.salt(32);
+  let payment_request = [
+    { pg_merchant_id: 520369 },
+    { pg_amount: 1111 },
+    { pg_currency: 'KZT'},
+    { pg_order_id :'123'},
+    { pg_result_url : 'https://example.com'},
+    { pg_description: 'Product' },
+    { pg_salt: salt },
+    { pg_language: 'ru' },
+    // { pg_payment_system:'TEST'}
+        ]
+  
+        let keys = []
+        payment_request.map( item => { keys.push( Object.keys(item)[0] ) });
+        let sorted = []
+        keys.sort().forEach( key => {
+          let a = payment_request.filter( item => Object.keys(item)[0] === key );
+          sorted.push(...a);
+        });
 
+      let payload = {};
+      sorted.map( a => {
+        for(let k in a ){
+          payload[k] = a[k];
+        }
+      });
+
+    console.log( typeof payload, payload );
+
+
+
+    console.log( payload );
+
+    payload = { 0:'payment.php', ...payload, s:'SU4vL4w6xTK7UKoU' }
+
+    console.log( payload );
+
+    let unsigned_str = '';
+    for(let k in payload){
+      unsigned_str += payload[k] + ';';
+    }
+
+    unsigned_str = unsigned_str.slice(0,-1);
+
+    console.log( unsigned_str );
+
+    let signed_str = passwordManager.sign( unsigned_str );
+
+
+
+    delete payload['0'];
+    delete payload['s'];
+
+    payload = { ...payload, pg_sig:signed_str };
+
+    console.log( payload );
+
+    let params = '';
+    for( let k in payload ){
+      params += `${ k }=${ payload[ k ] }&`
+    }
+
+    params = params.slice(0, -1);
+
+  res.status(200).send({
+    message: 'payment_ready',
+    url: `https://api.paybox.money/payment.php?${ params }`
+  });
+}
 

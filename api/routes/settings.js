@@ -9,8 +9,8 @@ const settingsController = require(`@tella-controllers/settings.js`);
 
 
 // admin
-router.get('/settings', jwt.verifyJWT, perms.admin(true), settingsController.getSettings);
-router.post('/settings', jwt.verifyJWT, perms.admin(true), settingsController.updateSettings);
+router.get('/settings', jwt.verifyJWT, perms.admin(true), settingsController.get);
+router.post('/settings', jwt.verifyJWT, perms.admin(true), settingsController.update);
 
 
 

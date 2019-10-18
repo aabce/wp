@@ -9,7 +9,8 @@ const promocodeController = require(`@tella-controllers/promocode.js`);
 router.get('/promocode', promocodeController.getAll);
 router.get('/promocode/:id', promocodeController.getById);
 
-router.post('/promocode', jwt.verifyJWT, perms.admin(true), promocodeController.createPromocode);
+// router.post('/promocode', jwt.verifyJWT, perms.admin(true), promocodeController.createPromocode); // prod
+router.post('/promocode', jwt.verifyJWT, promocodeController.createPromocode); // test
 router.put('/promocode/:id', jwt.verifyJWT, perms.admin(true), promocodeController.update);
 router.delete('/promocode/:id', jwt.verifyJWT, perms.admin(true), promocodeController.delete);
 

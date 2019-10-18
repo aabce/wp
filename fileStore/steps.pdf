@@ -1,0 +1,47 @@
+
+
+Объект отсортированный в алфовитном порядке по ключам
+{
+  pg_amount: 1111,
+  pg_currency: 'KZT',
+  pg_description: 'Product',
+  pg_language: 'ru',
+  pg_merchant_id: 520369,
+  pg_order_id: '123',
+  pg_result_url: 'https://example.com',
+  pg_salt: 'gM5qKPxgVr7FyRy2'
+}
+
+Добавлены ключ-значения для endpoint обработчика и secret_key по приему платежей из личного кабинета
+{
+  '0': 'payment.php',
+  pg_amount: 1111,
+  pg_currency: 'KZT',
+  pg_description: 'Product',
+  pg_language: 'ru',
+  pg_merchant_id: 520369,
+  pg_order_id: '123',
+  pg_result_url: 'https://example.com',
+  pg_salt: 'gM5qKPxgVr7FyRy2',
+  s: 'SU4vL4w6xTK7UKoU'
+}
+
+Сформирована строка для хэширования md5
+payment.php;1111;KZT;Product;ru;520369;123;https://example.com;gM5qKPxgVr7FyRy2;SU4vL4w6xTK7UKoU
+
+Сформирован объект запроса, удалены ключ-значения для endpoint обработчика и secret_key по приему платежей из личного кабинета и добавлен ключ-значение для pg_sig
+{
+  pg_amount: 1111,
+  pg_currency: 'KZT',
+  pg_description: 'Product',
+  pg_language: 'ru',
+  pg_merchant_id: 520369,
+  pg_order_id: '123',
+  pg_result_url: 'https://example.com',
+  pg_salt: 'gM5qKPxgVr7FyRy2',
+  pg_sig: '96ebcafb48ecc4d65f964180928f092c'
+}
+
+
+url
+https://api.paybox.money/payment.php?pg_amount=1111&pg_currency=KZT&pg_description=Product&pg_language=ru&pg_merchant_id=520369&pg_order_id=123&pg_result_url=https://example.com&pg_salt=gM5qKPxgVr7FyRy2&pg_sig=96ebcafb48ecc4d65f964180928f092c

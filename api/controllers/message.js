@@ -8,17 +8,22 @@ const whatsApp = require(`@tella-utills/whatsapp_notify.js`);
 const check = require(`@tella-utills/check.js`);
 const server_configs = require('@tella-configs/config.json');
 // const sendMail = require(`@tella-utills/email_notify.js`);
+const fetch = require('node-fetch');
+const schedule = require('node-schedule');
+
 
 
 
 const sendMessage = async (text, file) => {
   const subscribers = await userModel.find({ subscriber: true }, 'phone first_name last_name');
   for (let subscriber of subscribers) {
+    console.log(JSON.stringify('sending...'));
     whatsApp.sendMessage(subscriber, text);
-
-    // if (file){
-    //   whatsApp.sendFile(subscriber, file);
-    // }
+    
+    if (file){
+      console.log(JSON.stringify('sending...'));
+      whatsApp.sendFile(subscriber, file);
+    }
   }
 };
 
@@ -85,21 +90,29 @@ module.exports.create = async (req, res) => {
     }
 
     
-    // messageData.schedule_date = ( messageData.schedule_date ) ? messageData.schedule_date : Date.now();
-    // console.log(`MD:${JSON.stringify((messageData))}`);
+    messageData.schedule_date = ( messageData.schedule_date ) ? messageData.schedule_date : Date.now();
+    console.log(`MD:${JSON.stringify((messageData))}`);
     
     try {
-      const createdMessage = await agenda.schedule(
-          new Date(messageData.schedule_date), 
-          'schedule_message', 
-          { text: messageData.text, is_sended: false, file:file },
-        );
+
+      
+      var date = ( messageData.schedule_date ) ? new Date(messageData.schedule_date) : new Date( new Date().getTime()+60000);
+      console.log( JSON.stringify( date ) );
+      sendMessage( messageData.text, file );
+      var j = schedule.scheduleJob(date, function(){
+        console.log('The world is going to end today.');
+      });
+      // const createdMessage = await agenda.schedule(
+      //     new Date(messageData.schedule_date), 
+      //     'schedule_message', 
+      //     { text: messageData.text, is_sended: false, file:file },
+      //   );
       // const createdMessage = await messageModel.create(messageData);
 
       res.status(200).send({
         message: 'message_was_created',
-        id: createdMessage.attrs._id,
-        scheduled_at: createdMessage.attrs.nextRunAt
+        // id: createdMessage.attrs._id,
+        // scheduled_at: createdMessage.attrs.nextRunAt
       });
     } catch (err) {
       res.status(400).send({ error: err.message });
@@ -173,3 +186,4 @@ module.exports.delete = async (req, res) => {
     res.status(400).send({ error: 'invalid_id' });
   }
 };
+

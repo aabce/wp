@@ -11,7 +11,6 @@ const messageView = (text, first_name, last_name) => `Уважаемый под�
 const wp_configs = async () => {
   try{
     let settings = await settingsModel.find().limit(1);
-    console.log(`CONF:${JSON.stringify(settings)}`);
     return settings[0].wp
   }catch( err ){
     console.log(`WP_ERR:${err}`);
@@ -22,11 +21,18 @@ const wp_configs = async () => {
 module.exports.sendMessage = async (subscriber, text) => {
   const configs = await wp_configs();
   const url = `${configs.api_url}sendMessage?token=${configs.token}`;
-  console.log(`url:${JSON.stringify(url)}`);
-  const message = messageView(text, subscriber.first_name, subscriber.last_name);
+  // console.log(`url:${JSON.stringify(url)}`);
+  let message = messageView(text, subscriber.first_name, subscriber.last_name);
+  
+  let msg = message.replace(/<\s*p[^>]*>/g, ' ')
+      .replace(/<\s*\/\s*p>/g, '\n')
+      .replace(/<\s*em[^>]*>|<\s*\/\s*em>/g, '_')
+      .replace(/<\s*strong[^>]*>|<\s*\/\s*strong>/g, '*')
+      .replace(/<\s*s*>|<\s*\/\s*s>/g, '~');
+  
   const data = {
-    phone: subscriber.phone,
-    body: message,
+    phone: subscriber.phone, //'77755505497' not + or 8 just 7_
+    body: msg,
   };
 
   const body = {

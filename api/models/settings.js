@@ -31,16 +31,27 @@ const settingsSchema = new mongoose.Schema({
 
   },
 
-    wp: {
-      api_url: {
-        type:String,
-      },
-  
-      token: {
-        type:String,
-      }
+  wp: {
+    api_url: {
+      type:String,
+    },
 
+    token: {
+      type:String,
     }
+
+  },
+
+  ps: {
+    pg_merchant_id: {
+      type:String,
+    },
+
+    secret_key: {
+      type:String,
+    }
+
+  }
 
 },
 {

@@ -1,5 +1,5 @@
 'use strict';
-
+const md5 = require('md5');
 const crypto = require('crypto');
 
 function generateSalt(length) {
@@ -15,8 +15,8 @@ module.exports.salt = (length) => {
 }
 
 
-module.exports.sign = (payload, salt) => {
-  return crypto.createHmac('md5', salt).update(payload).digest('hex');
+module.exports.sign = (payload) => {
+  return md5(payload);
 }
 
 

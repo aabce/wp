@@ -31,7 +31,7 @@ module.exports.createPromocode = async (req, res) => {
 
 module.exports.getAll = async (req, res) => {
   try {
-    let promoCodes = await promoCodeModel.find({}, '-__v -_id');
+    let promoCodes = await promoCodeModel.find({}, '-__v');
     check.isArrayEmpty(promoCodes) ? res.status(404).send({ status: 'promo_codes_not_found' }) : res.status(200).send(promoCodes);
   } catch (err) {
     res.status(400).send({ error: err.message });

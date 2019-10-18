@@ -9,6 +9,7 @@ const subscriptionController = require(`@tella-controllers/subscription.js`);
 router.get('/subscription/', subscriptionController.get);
 
 // admin
-router.post('/subscription', jwt.verifyJWT, perms.admin(true), subscriptionController.create);
+// router.post('/subscription', jwt.verifyJWT, perms.admin(true), subscriptionController.create); // prod
+router.post('/subscription', jwt.verifyJWT, subscriptionController.create); //test
 
 module.exports = router;
